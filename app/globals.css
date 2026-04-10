@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── IEEE Blue (primary) ── */
+  --color-primary: #00546B;
+  --color-primary-accent: #00546B;
+  --color-primary-container: #dbeefe;
+  --color-primary-fixed: #cee5ff;
+  --color-primary-fixed-dim: #98cbff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #003d61;
+  --color-on-primary-fixed: #001d33;
+  --color-on-primary-fixed-variant: #004a77;
+  --color-inverse-primary: #98cbff;
+
+  /* ── Surfaces (light/white theme) ── */
+  --color-surface: #ffffff;
+  --color-surface-dim: #f0f4f8;
+  --color-surface-bright: #ffffff;
+  --color-surface-tint: #00546B;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f8fb;
+  --color-surface-container: #f0f4f8;
+  --color-surface-container-high: #e8ecf2;
+  --color-surface-container-highest: #dde2ea;
+  --color-surface-variant: #e4e8f0;
+
+  /* ── Text on surfaces ── */
+  --color-on-surface: #1e293b;
+  --color-on-surface-variant: #64748b;
+  --color-on-background: #1e293b;
+  --color-background: #ffffff;
+  --color-inverse-surface: #1e293b;
+  --color-inverse-on-surface: #f0f2f5;
+
+  /* ── Outlines ── */
+  --color-outline: #cbd5e1;
+  --color-outline-variant: #e2e8f0;
+
+  /* ── Secondary / Error ── */
+  --color-secondary: #dc2626;
+  --color-secondary-container: #fef2f2;
+  --color-secondary-fixed: #ffdad6;
+  --color-secondary-fixed-dim: #ffb4ab;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #7f1d1d;
+  --color-on-secondary-fixed: #410002;
+  --color-on-secondary-fixed-variant: #93000b;
+  --color-error: #dc2626;
+  --color-error-container: #fef2f2;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #7f1d1d;
+
+  /* ── Tertiary (coral/orange accent) ── */
+  --color-tertiary: #e8956a;
+  --color-tertiary-container: #e4e8f0;
+  --color-tertiary-fixed: #dfe3e7;
+  --color-tertiary-fixed-dim: #c3c7cb;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #3a4050;
+  --color-on-tertiary-fixed: #171c1f;
+  --color-on-tertiary-fixed-variant: #43474b;
+
+  /* ── Radius ── */
+  --radius-DEFAULT: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ── Base ── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #1e293b;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Utility ── */
+.section-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FAQ Animation */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease;
+}
+.faq-item.active .faq-content {
+  max-height: 200px;
+  padding-top: 1rem;
+}
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}

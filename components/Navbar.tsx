@@ -41,6 +41,7 @@ export default function Navbar() {
             <Link href="#schedule" className="text-sm text-white/80 hover:text-white transition-colors">Program</Link>
             <Link href="#accommodation" className="text-sm text-white/80 hover:text-white transition-colors">Accommodation</Link>
             <Link href="#sponsors" className="text-sm text-white/80 hover:text-white transition-colors">Sponsors</Link>
+            <Link href="#gallery" className="text-sm text-white/80 hover:text-white transition-colors">Gallery</Link>
             <Link href="#contact" className="text-sm text-white/80 hover:text-white transition-colors">Contact</Link>
           </div>
 
@@ -67,6 +68,7 @@ export default function Navbar() {
           <Link href="#speakers" className="block text-sm text-white/80" onClick={() => setIsMobileMenuOpen(false)}>Speakers</Link>
           <Link href="#schedule" className="block text-sm text-white/80" onClick={() => setIsMobileMenuOpen(false)}>Program</Link>
           <Link href="#accommodation" className="block text-sm text-white/80" onClick={() => setIsMobileMenuOpen(false)}>Accommodation</Link>
+          <Link href="#gallery" className="block text-sm text-white/80" onClick={() => setIsMobileMenuOpen(false)}>Gallery</Link>
           <Link href="#contact" className="block text-sm text-white/80" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
           <button className="w-full bg-[#c9a227] text-white py-2.5 rounded text-sm font-bold mt-3">Register Now</button>
         </div>

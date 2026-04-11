@@ -8,6 +8,7 @@ import RegistrationSection from "@/components/RegistrationSection";
 import ScheduleSection from "@/components/ScheduleSection";
 import AccommodationSection from "@/components/AccommodationSection";
 import SponsorsSection from "@/components/SponsorsSection";
+import GallerySection from "@/components/GallerySection";
 import FaqSection from "@/components/FaqSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -27,6 +28,7 @@ export default function Home() {
       <ScheduleSection />
       <AccommodationSection />
       <SponsorsSection />
+      <GallerySection />
       <FaqSection />
       <ContactSection />
       <Footer />

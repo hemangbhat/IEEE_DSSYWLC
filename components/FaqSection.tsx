@@ -26,14 +26,18 @@ export default function FaqSection() {
                 className={`faq-item border border-gray-200 rounded-lg overflow-hidden transition-all ${activeIndex === i ? "active bg-gray-50" : "bg-white"}`}
               >
                 <div
-                  className="flex justify-between items-center p-5 cursor-pointer"
+                  className="flex justify-between items-center px-5 py-3 cursor-pointer"
                   onClick={() => setActiveIndex(activeIndex === i ? null : i)}
                 >
                   <h4 className="text-slate-800 font-semibold text-sm">{faq.q}</h4>
                   <span className="faq-icon material-symbols-outlined text-gray-400 text-xl transition-transform flex-shrink-0 ml-4">add</span>
                 </div>
-                <div className="faq-content px-5 text-sm text-gray-500 leading-relaxed pb-5">
-                  {faq.a}
+                <div className="faq-content text-sm text-gray-500 leading-relaxed">
+                  <div>
+                    <div className="px-5 pb-3 -mt-1">
+                      {faq.a}
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}

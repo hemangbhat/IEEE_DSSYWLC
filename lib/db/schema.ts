@@ -16,11 +16,17 @@ export const registrations = pgTable(
     email: text("email").notNull(),
     phone: text("phone").notNull(),
     affiliation: text("affiliation").notNull(),
-    ieeeId: text("ieee_id"),
+    category: text("category").notNull(), // student_member | graduate_student_member | professional_member | faculty_member
+    referralCode: text("referral_code"),
+    // IEEE member fields
     isMember: boolean("is_member").notNull().default(false),
-    category: text("category").notNull(), // student | professional | faculty
-    dietaryPreference: text("dietary_preference"),
-    tshirtSize: text("tshirt_size"),
+    ieeeId: text("ieee_id"),
+    studentBranchCode: text("student_branch_code"),
+    ieeeCardUrl: text("ieee_card_url"),
+    // Payment fields
+    paymentScreenshotUrl: text("payment_screenshot_url"),
+    registrationStatus: text("registration_status").notNull().default("pending"), // pending | payment_submitted | verified | rejected
+    // Timestamps
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },

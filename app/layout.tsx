@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import TopBanner from "@/components/TopBanner";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-white`}>
         <ClerkProvider>
+          <TopBanner />
           {children}
         </ClerkProvider>
       </body>

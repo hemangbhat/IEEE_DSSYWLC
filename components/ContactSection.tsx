@@ -21,7 +21,7 @@ export default function ContactSection() {
 
               <div>
                 <h4 className="text-slate-800 font-bold text-sm mb-2">Contact</h4>
-                <a href="tel:+918302801639" className="text-[#7B1F34] text-sm font-semibold hover:underline">+91 8302801639</a>
+                <a href="tel:+919876543210" className="text-[#7B1F34] text-sm font-semibold hover:underline">+91 98765 43210</a>
               </div>
 
               <div>
@@ -34,15 +34,15 @@ export default function ContactSection() {
                 <div>
                   <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">IEEE Student Branch Representatives</h5>
                   <div className="space-y-2 text-sm text-gray-600">
-                    <p>Pranav Khandelwal — <a href="tel:+918302801639" className="text-[#7B1F34] hover:underline">+91 83028 01639</a></p>
-                    <p>Kartikey Sharma — <a href="tel:+919413120504" className="text-[#7B1F34] hover:underline">+91 94131 20504</a></p>
+                    <p>Alex Johnson — <a href="tel:+919876543210" className="text-[#7B1F34] hover:underline">+91 98765 43210</a></p>
+                    <p>Sarah Williams — <a href="tel:+919876543211" className="text-[#7B1F34] hover:underline">+91 98765 43211</a></p>
                   </div>
                 </div>
                 <div>
                   <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">IEEE Student Section Representatives</h5>
                   <div className="space-y-2 text-sm text-gray-600">
-                    <p>Shubham Gupta — <a href="tel:+919667979306" className="text-[#7B1F34] hover:underline">+91 96679 79306</a></p>
-                    <p>Garima Singh — <a href="tel:+919560884883" className="text-[#7B1F34] hover:underline">+91 95608 84883</a></p>
+                    <p>Michael Brown — <a href="tel:+919876543212" className="text-[#7B1F34] hover:underline">+91 98765 43212</a></p>
+                    <p>Emily Davis — <a href="tel:+919876543213" className="text-[#7B1F34] hover:underline">+91 98765 43213</a></p>
                   </div>
                 </div>
               </div>

@@ -6,38 +6,50 @@ export default function RegistrationSection() {
       <div className="section-container">
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Registration Plans</h2>
+          <p className="text-gray-500 mb-4">Choose the plan that suits you best. Early bird registration ends soon.</p>
           <div className="w-16 h-0.5 bg-[#7B1F34] mx-auto"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-on-scroll">
-          {/* IEEE Member */}
-          <div className="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
-            <h3 className="text-xl font-bold text-slate-800 mb-4">IEEE Members</h3>
+          {/* IEEE Member — Recommended */}
+          <div className="bg-white rounded-lg border-2 border-[#7B1F34] p-8 shadow-sm relative">
+            <div className="absolute -top-3 right-6 bg-[#7B1F34] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded">
+              Recommended
+            </div>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">IEEE Members</h3>
+            <p className="text-3xl font-bold text-[#7B1F34] mb-6">₹700</p>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Access to all technical sessions
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Full Access to All Sessions
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Delegate kit &amp; certificates
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Conference Kit
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Meals included both days
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Lunch &amp; High Tea
+              </li>
+              <li className="flex items-center gap-3 text-sm text-gray-600">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7B1F34]"></span> Certificate of Participation
               </li>
             </ul>
           </div>
 
           {/* Non-IEEE Member */}
           <div className="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
-            <h3 className="text-xl font-bold text-slate-800 mb-4">Non-IEEE Members</h3>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">Non-IEEE Members</h3>
+            <p className="text-3xl font-bold text-slate-800 mb-6">₹1000</p>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Access to all technical sessions
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Full Access to All Sessions
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Delegate kit &amp; certificates
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Conference Kit
               </li>
               <li className="flex items-center gap-3 text-sm text-gray-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Meals included both days
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Lunch &amp; High Tea
+              </li>
+              <li className="flex items-center gap-3 text-sm text-gray-600">
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span> Certificate of Participation
               </li>
             </ul>
           </div>
@@ -51,7 +63,6 @@ export default function RegistrationSection() {
           >
             Register Now
           </Link>
-          <p className="text-gray-400 text-sm mt-3">Both IEEE and Non-IEEE members register here</p>
         </div>
       </div>
     </section>

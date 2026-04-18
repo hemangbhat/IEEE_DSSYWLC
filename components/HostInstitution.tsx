@@ -7,7 +7,7 @@ export default function HostInstitution() {
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Host Institution</h2>
             <p className="text-gray-600 text-lg mb-1">Poornima Institute of Engineering &amp; Technology</p>
-            <div className="w-16 h-1 bg-[#e8956a] rounded-full mb-8"></div>
+            <div className="w-16 h-0.5 bg-[#7B1F34] rounded-full mb-8"></div>
 
             <p className="text-gray-500 leading-relaxed mb-6">
               Poornima Institute of Engineering and Technology (PIET) is an Autonomous institution in engineering education, established in the academic year 2007, affiliated with Rajasthan Technical University (Kota), approved by AICTE, and recognized under UGC 2(f). With over 1700 students, the institute offers eight specialized undergraduate engineering programs, focused on imparting robust technical skills and holistic development.
@@ -18,20 +18,20 @@ export default function HostInstitution() {
 
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-[#e8956a]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#7B1F34]"></span>
                 <span className="text-slate-700 font-semibold text-sm">NAAC Accredited Programs</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-[#e8956a]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#7B1F34]"></span>
                 <span className="text-slate-700 font-semibold text-sm">Top-Tier Research Labs</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-[#e8956a]"></span>
+                <span className="w-2 h-2 rounded-full bg-[#7B1F34]"></span>
                 <span className="text-slate-700 font-semibold text-sm">Award-Winning IEEE SB</span>
               </li>
             </ul>
 
-            <a href="https://poornimainstitute.edu.in" target="_blank" rel="noopener noreferrer" className="text-[#00546B] font-semibold text-sm hover:underline inline-flex items-center gap-1">
+            <a href="https://poornimainstitute.edu.in" target="_blank" rel="noopener noreferrer" className="text-[#7B1F34] font-semibold text-sm hover:underline inline-flex items-center gap-1">
               Visit Institute Website <span className="material-symbols-outlined text-base">arrow_forward</span>
             </a>
           </div>

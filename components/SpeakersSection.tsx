@@ -7,22 +7,21 @@ export default function SpeakersSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#f0f4f8]" id="speakers">
+    <section className="py-20 bg-white" id="speakers">
       <div className="section-container">
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Distinguished Speakers</h2>
-          <p className="text-gray-500 mb-4">Leaders from academia, industry, and IEEE governance.</p>
-          <div className="w-16 h-1 bg-[#e8956a] rounded-full mx-auto"></div>
+          <div className="w-16 h-0.5 bg-[#7B1F34] mx-auto"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 animate-on-scroll">
           {speakers.map((speaker, i) => (
             <div key={i} className="bg-white rounded-lg border border-gray-200 p-8 text-center hover:shadow-lg transition-shadow">
               <div className="w-28 h-28 mx-auto mb-5 rounded-full overflow-hidden border-4 border-white shadow-md">
                 <img src={speaker.img} alt={speaker.name} className="w-full h-full object-cover" />
               </div>
               <h3 className="text-slate-800 font-bold text-base mb-1">{speaker.name}</h3>
-              <p className="text-[#00546B] text-sm leading-relaxed">{speaker.role}</p>
+              <p className="text-[#7B1F34] text-sm leading-relaxed">{speaker.role}</p>
             </div>
           ))}
         </div>

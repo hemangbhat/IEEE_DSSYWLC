@@ -265,11 +265,11 @@ export default function GallerySection() {
   );
 
   return (
-    <section className="py-20 bg-[#f8fafb]" id="gallery">
+    <section className="py-20 bg-[#f0f4f8]" id="gallery">
       <div className="section-container animate-on-scroll">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <p className="text-[#c9a227] font-bold text-sm uppercase tracking-widest mb-3">
+          <p className="text-[#7B1F34] font-bold text-sm uppercase tracking-widest mb-3">
             Glimpses from Previous Editions
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Event Gallery</h2>
@@ -286,7 +286,7 @@ export default function GallerySection() {
                 key={year}
                 onClick={() => setActiveYear(year)}
                 className={`relative px-8 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeYear === year
-                  ? "bg-[#00546B] text-white shadow-md"
+                  ? "bg-[#7B1F34] text-white shadow-md"
                   : "text-gray-500 hover:text-gray-700"
                   }`}
               >

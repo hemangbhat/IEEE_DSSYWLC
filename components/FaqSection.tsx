@@ -17,7 +17,7 @@ export default function FaqSection() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 animate-on-scroll">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Frequently Asked Questions</h2>
-            <div className="w-16 h-1 bg-[#e8956a] rounded-full mx-auto"></div>
+            <div className="w-16 h-0.5 bg-[#7B1F34] mx-auto"></div>
           </div>
           <div className="space-y-3 animate-on-scroll">
             {faqs.map((faq, i) => (
@@ -30,7 +30,7 @@ export default function FaqSection() {
                   onClick={() => setActiveIndex(activeIndex === i ? null : i)}
                 >
                   <h4 className="text-slate-800 font-semibold text-sm">{faq.q}</h4>
-                  <span className="faq-icon material-symbols-outlined text-gray-400 text-xl transition-transform flex-shrink-0 ml-4">add</span>
+                  <span className="faq-icon material-symbols-outlined text-[#7B1F34] text-xl transition-transform flex-shrink-0 ml-4">add</span>
                 </div>
                 <div className="faq-content text-sm text-gray-500 leading-relaxed">
                   <div>

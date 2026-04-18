@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── IEEE Blue (primary) ── */
-  --color-primary: #00546B;
-  --color-primary-accent: #00546B;
-  --color-primary-container: #dbeefe;
-  --color-primary-fixed: #cee5ff;
-  --color-primary-fixed-dim: #98cbff;
+  /* ── Maroon/Burgundy (primary) ── */
+  --color-primary: #7B1F34;
+  --color-primary-accent: #7B1F34;
+  --color-primary-container: #f5e6ea;
+  --color-primary-fixed: #f5e6ea;
+  --color-primary-fixed-dim: #d4a0ad;
   --color-on-primary: #ffffff;
-  --color-on-primary-container: #003d61;
-  --color-on-primary-fixed: #001d33;
-  --color-on-primary-fixed-variant: #004a77;
-  --color-inverse-primary: #98cbff;
+  --color-on-primary-container: #5a0f22;
+  --color-on-primary-fixed: #3d0815;
+  --color-on-primary-fixed-variant: #6B1D2A;
+  --color-inverse-primary: #d4a0ad;
 
   /* ── Surfaces (light/white theme) ── */
   --color-surface: #ffffff;
   --color-surface-dim: #f0f4f8;
   --color-surface-bright: #ffffff;
-  --color-surface-tint: #00546B;
+  --color-surface-tint: #7B1F34;
   --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #f7f8fb;
   --color-surface-container: #f0f4f8;
@@ -51,8 +51,8 @@
   --color-on-error: #ffffff;
   --color-on-error-container: #7f1d1d;
 
-  /* ── Tertiary (coral/orange accent) ── */
-  --color-tertiary: #e8956a;
+  /* ── Tertiary (muted neutral) ── */
+  --color-tertiary: #94a3b8;
   --color-tertiary-container: #e4e8f0;
   --color-tertiary-fixed: #dfe3e7;
   --color-tertiary-fixed-dim: #c3c7cb;
@@ -166,7 +166,7 @@ body {
   transform: scale(1);
 }
 .carousel-card:hover {
-  box-shadow: 0 8px 30px rgba(0,84,107,0.18);
+  box-shadow: 0 8px 30px rgba(123,31,52,0.18);
   z-index: 2;
   transform: scale(1.03);
 }
@@ -189,7 +189,7 @@ body {
   border: none;
   background: white;
   box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  color: #00546B;
+  color: #7B1F34;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,9 +201,9 @@ body {
   opacity: 1;
 }
 .carousel-arrow:hover {
-  background: #00546B;
+  background: #7B1F34;
   color: white;
-  box-shadow: 0 4px 16px rgba(0,84,107,0.3);
+  box-shadow: 0 4px 16px rgba(123,31,52,0.3);
 }
 .carousel-arrow-left  { left: 1.25rem; }
 .carousel-arrow-right { right: 1.25rem; }
@@ -243,7 +243,7 @@ body {
   transition: background 0.3s ease;
 }
 .carousel-card:hover .gallery-play-icon {
-  background: rgba(0,84,107,0.4);
+  background: rgba(123,31,52,0.4);
 }
 
 /* Overlay */
@@ -252,8 +252,8 @@ body {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0,30,45,0.85) 0%,
-    rgba(0,30,45,0.3) 40%,
+    rgba(60,10,20,0.85) 0%,
+    rgba(60,10,20,0.3) 40%,
     transparent 100%
   );
   display: flex;
@@ -287,7 +287,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #c9a227;
+  background: #7B1F34;
   color: white;
   font-size: 0.6rem;
   font-weight: 700;
@@ -395,7 +395,7 @@ body {
   z-index: 10;
 }
 .lightbox-caption-badge {
-  color: #c9a227;
+  color: #7B1F34;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;

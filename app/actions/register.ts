@@ -1,168 +1,143 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
+import { randomBytes } from "crypto";
+import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { registrations } from "@/lib/db/schema";
-import { registrationSchema, paymentSchema } from "@/lib/validations";
-import { eq } from "drizzle-orm";
+import { sendConfirmationEmail } from "@/lib/email";
+import { step1Schema, step2Schema, step3Schema } from "@/lib/validations";
 
 export type RegisterState = {
   success: boolean;
   errors?: Record<string, string[]>;
   message?: string;
+  profileToken?: string;
 };
 
-// ─── Helper: save base64 file data to a URL-safe reference ───
-// In production, replace with S3/Cloudinary upload.
-// For now, store the base64 data URI directly in the DB.
-function storeFileData(base64Data: string): string | null {
-  if (!base64Data || base64Data.trim() === "") return null;
-  return base64Data;
+function mergeFieldErrors(
+  ...sources: Array<Record<string, string[] | undefined>>
+): Record<string, string[]> {
+  const merged: Record<string, string[]> = {};
+
+  for (const source of sources) {
+    for (const [field, values] of Object.entries(source)) {
+      if (!values || values.length === 0) {
+        continue;
+      }
+      merged[field] = values;
+    }
+  }
+
+  return merged;
 }
 
-// ─── Step 1: Save registration details ───
-export async function registerUser(
+function readString(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  return typeof value === "string" ? value : "";
+}
+
+export async function submitRegistration(
   _prevState: RegisterState,
   formData: FormData
 ): Promise<RegisterState> {
-  const { userId } = await auth();
-  if (!userId) {
-    return { success: false, message: "You must be signed in to register." };
-  }
-
-  const rawData = {
-    fullName: (formData.get("fullName") as string) ?? "",
-    email: (formData.get("email") as string) ?? "",
-    phone: (formData.get("phone") as string) ?? "",
-    affiliation: (formData.get("affiliation") as string) ?? "",
-    category: (formData.get("category") as string) ?? "",
-    referralCode: (formData.get("referralCode") as string) ?? "",
-    isMember: formData.get("isMember") === "true",
-    ieeeId: (formData.get("ieeeId") as string) ?? "",
-    studentBranchCode: (formData.get("studentBranchCode") as string) ?? "",
-    ieeeCardData: (formData.get("ieeeCardData") as string) ?? "",
+  const step1Input = {
+    fullName: readString(formData, "fullName"),
+    email: readString(formData, "email"),
+    phone: readString(formData, "phone"),
+    affiliation: readString(formData, "affiliation"),
   };
 
-  const parsed = registrationSchema.safeParse(rawData);
+  const step2Input = {
+    category: readString(formData, "category"),
+    referralCode: readString(formData, "referralCode"),
+    isMember: readString(formData, "isMember") === "true",
+    ieeeId: readString(formData, "ieeeId"),
+    studentBranchCode: readString(formData, "studentBranchCode"),
+    ieeeCardS3Key: readString(formData, "ieeeCardS3Key"),
+  };
 
-  if (!parsed.success) {
+  const step3Input = {
+    paymentScreenshotS3Key: readString(formData, "paymentScreenshotS3Key"),
+  };
+
+  const step1Parsed = step1Schema.safeParse(step1Input);
+  const step2Parsed = step2Schema.safeParse(step2Input);
+  const step3Parsed = step3Schema.safeParse(step3Input);
+
+  if (!step1Parsed.success || !step2Parsed.success || !step3Parsed.success) {
     return {
       success: false,
-      errors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+      errors: mergeFieldErrors(
+        step1Parsed.success ? {} : step1Parsed.error.flatten().fieldErrors,
+        step2Parsed.success ? {} : step2Parsed.error.flatten().fieldErrors,
+        step3Parsed.success ? {} : step3Parsed.error.flatten().fieldErrors
+      ),
       message: "Please fix the errors below.",
     };
   }
 
-  try {
-    const existing = await db
-      .select({ id: registrations.id })
-      .from(registrations)
-      .where(eq(registrations.clerkUserId, userId))
-      .limit(1);
-
-    const dbValues = {
-      fullName: parsed.data.fullName,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      affiliation: parsed.data.affiliation,
-      category: parsed.data.category,
-      referralCode: parsed.data.referralCode || null,
-      isMember: parsed.data.isMember,
-      ieeeId: parsed.data.ieeeId || null,
-      studentBranchCode: parsed.data.studentBranchCode || null,
-      ieeeCardUrl: storeFileData(parsed.data.ieeeCardData ?? ""),
-      updatedAt: new Date(),
-    };
-
-    if (existing.length > 0) {
-      await db
-        .update(registrations)
-        .set(dbValues)
-        .where(eq(registrations.clerkUserId, userId));
-    } else {
-      await db.insert(registrations).values({
-        clerkUserId: userId,
-        ...dbValues,
-      });
-    }
-
-    return { success: true, message: "Registration saved successfully!" };
-  } catch (error) {
-    console.error("Registration error:", error);
-    return {
-      success: false,
-      message: "An unexpected error occurred. Please try again.",
-    };
-  }
-}
-
-// ─── Step 2: Save payment screenshot ───
-export async function submitPayment(
-  _prevState: RegisterState,
-  formData: FormData
-): Promise<RegisterState> {
-  const { userId } = await auth();
-  if (!userId) {
-    return { success: false, message: "You must be signed in." };
-  }
-
-  const rawData = {
-    paymentScreenshotData: formData.get("paymentScreenshotData") as string,
-  };
-
-  const parsed = paymentSchema.safeParse(rawData);
-
-  if (!parsed.success) {
-    return {
-      success: false,
-      errors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
-      message: "Please upload a payment screenshot.",
-    };
-  }
+  const now = new Date();
+  const normalizedEmail = step1Parsed.data.email.trim().toLowerCase();
 
   try {
     const existing = await db
-      .select({ id: registrations.id })
+      .select({ profileToken: registrations.profileToken })
       .from(registrations)
-      .where(eq(registrations.clerkUserId, userId))
+      .where(eq(registrations.email, normalizedEmail))
       .limit(1);
 
-    if (existing.length === 0) {
-      return {
-        success: false,
-        message: "Please complete Step 1 (registration) first.",
-      };
-    }
+    const profileToken =
+      existing[0]?.profileToken ?? randomBytes(32).toString("hex");
+
+    const values = {
+      profileToken,
+      fullName: step1Parsed.data.fullName.trim(),
+      email: normalizedEmail,
+      phone: step1Parsed.data.phone.trim(),
+      affiliation: step1Parsed.data.affiliation.trim(),
+      category: step2Parsed.data.category,
+      referralCode: step2Parsed.data.referralCode?.trim() || null,
+      isMember: step2Parsed.data.isMember,
+      ieeeId: step2Parsed.data.isMember
+        ? step2Parsed.data.ieeeId?.trim() || null
+        : null,
+      studentBranchCode: step2Parsed.data.isMember
+        ? step2Parsed.data.studentBranchCode?.trim() || null
+        : null,
+      ieeeCardS3Key: step2Parsed.data.isMember
+        ? step2Parsed.data.ieeeCardS3Key?.trim() || null
+        : null,
+      paymentScreenshotS3Key: step3Parsed.data.paymentScreenshotS3Key.trim(),
+      registrationStatus: "under_review",
+      updatedAt: now,
+    };
 
     await db
-      .update(registrations)
-      .set({
-        paymentScreenshotUrl: storeFileData(parsed.data.paymentScreenshotData),
-        registrationStatus: "payment_submitted",
-        updatedAt: new Date(),
-      })
-      .where(eq(registrations.clerkUserId, userId));
+      .insert(registrations)
+      .values(values)
+      .onConflictDoUpdate({
+        target: registrations.email,
+        set: values,
+      });
 
-    return { success: true, message: "Payment submitted successfully!" };
+    const emailSent = await sendConfirmationEmail(
+      normalizedEmail,
+      values.fullName,
+      profileToken
+    );
+
+    return {
+      success: true,
+      profileToken,
+      message: emailSent
+        ? "Registration submitted successfully."
+        : "Registration submitted successfully. Confirmation email is currently unavailable.",
+    };
   } catch (error) {
-    console.error("Payment error:", error);
+    console.error("Registration submission failed:", error);
     return {
       success: false,
       message: "An unexpected error occurred. Please try again.",
     };
   }
-}
-
-// ─── Fetch existing registration ───
-export async function getExistingRegistration() {
-  const { userId } = await auth();
-  if (!userId) return null;
-
-  const existing = await db
-    .select()
-    .from(registrations)
-    .where(eq(registrations.clerkUserId, userId))
-    .limit(1);
-
-  return existing[0] ?? null;
 }

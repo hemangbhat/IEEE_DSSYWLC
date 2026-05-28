@@ -95,7 +95,7 @@ export default async function ProfilesPage({
               A confirmation and status updates are sent to your registered email address.
             </p>
             <p className="text-blue-700 text-sm mt-1">
-              Please check your inbox (and spam folder) for emails from <strong>no-reply@ieeensut.com</strong>
+              Please check your inbox (and spam folder) for emails from <strong>no-reply@dssywlcnsut.in</strong>
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@
  * using the Google Sheets API v4 with a service account.
  *
  * This replaces the Google Apps Script webhook approach because
- * Google blocks Apps Script web-app requests from cloud IPs (Vercel / AWS).
+ * Google blocks Apps Script web-app requests from cloud IPs (Netlify / AWS).
  *
  * Required env vars:
  *   GOOGLE_SHEET_ID              — The spreadsheet ID from the Sheet URL
@@ -24,7 +24,7 @@ function getAuth() {
 
   return new google.auth.JWT({
     email,
-    // Vercel stores env vars with literal "\n" — convert to actual newlines
+    // Hosting platforms store env vars with literal "\n" — convert to actual newlines
     key: key.replace(/\\n/g, "\n"),
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
@@ -58,7 +58,7 @@ export async function pushRegistrationToSheet(data: {
   }
 
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://ieee-dssywlc.vercel.app";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://dssywlcnsut.in";
   const profileLink =
     siteUrl + "/profiles?token=" + encodeURIComponent(data.profileToken);
 

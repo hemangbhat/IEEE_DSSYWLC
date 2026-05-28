@@ -2,11 +2,11 @@
  * Email integration — sends transactional emails via the Brevo API.
  *
  * Uses the Brevo HTTP API (not SMTP) to avoid IP-restriction issues
- * that occur on cloud platforms like Vercel.
+ * that occur on cloud platforms like Netlify.
  *
  * Required env vars:
  *   BREVO_API_KEY    — Brevo API key (xkeysib-...)
- *   BREVO_FROM_EMAIL — Sender email (e.g. no-reply@ieeensut.com)
+ *   BREVO_FROM_EMAIL — Sender email (e.g. no-reply@dssywlcnsut.in)
  *   BREVO_FROM_NAME  — Sender display name
  */
 

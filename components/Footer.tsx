@@ -40,9 +40,8 @@ export default function Footer() {
               IEEE Section Student, Young Professionals &amp; Women in
               Engineering and Life member Congress.
             </p>
-            <div className="mt-4 space-y-1 text-sm text-white/70">
+            <div className="mt-4 text-sm text-white/70">
               <p>📞 +91 871 128 2398</p>
-              <p>✉️ naaswlc@dssywlc.com</p>
             </div>
           </div>
           <div>
@@ -117,11 +116,7 @@ export default function Footer() {
           <p className="text-white/40 text-xs">
             © 2025 – DSSYWLC Delhi Section
           </p>
-          <p className="text-white/40 text-xs">
-            <Link href="#" className="text-white/60 hover:text-white">
-              Privacy Policy
-            </Link>
-          </p>
+
         </div>
       </div>
     </footer>

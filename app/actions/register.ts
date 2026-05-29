@@ -1,12 +1,28 @@
 "use server";
 
 import { randomBytes } from "crypto";
+import { headers } from "next/headers";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { registrations } from "@/lib/db/schema";
 import { sendConfirmationEmail } from "@/lib/email";
 import { step1Schema, step2Schema, step3Schema } from "@/lib/validations";
 import { pushRegistrationToSheet } from "@/lib/google-sheets";
+import { verifyTurnstileToken } from "@/lib/turnstile";
+import { isRateLimited } from "@/lib/rate-limit";
+
+// Registration throttle: max submissions allowed per IP within the window.
+const REGISTER_RATE_LIMIT_MAX = 5;
+const REGISTER_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+
+async function getClientIp(): Promise<string> {
+  const headerList = await headers();
+  const forwardedFor = headerList.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() || "unknown";
+  }
+  return headerList.get("x-real-ip") || "unknown";
+}
 
 export type RegisterState = {
   success: boolean;
@@ -41,6 +57,40 @@ export async function submitRegistration(
   _prevState: RegisterState,
   formData: FormData,
 ): Promise<RegisterState> {
+  const clientIp = await getClientIp();
+
+  // Throttle by IP (defence-in-depth; primary protection is the CAPTCHA below).
+  if (
+    clientIp !== "unknown" &&
+    isRateLimited(
+      "register",
+      clientIp,
+      REGISTER_RATE_LIMIT_MAX,
+      REGISTER_RATE_LIMIT_WINDOW_MS,
+    )
+  ) {
+    return {
+      success: false,
+      message:
+        "Too many registration attempts. Please wait a few minutes and try again.",
+    };
+  }
+
+  // Verify CAPTCHA before doing any DB/email/Sheets work.
+  // No-op when Turnstile is not configured (site behaves as before).
+  const turnstileToken = readString(formData, "cf-turnstile-response");
+  const captchaOk = await verifyTurnstileToken(
+    turnstileToken,
+    clientIp === "unknown" ? undefined : clientIp,
+  );
+  if (!captchaOk) {
+    return {
+      success: false,
+      message:
+        "CAPTCHA verification failed. Please complete the challenge and try again.",
+    };
+  }
+
   const step1Input = {
     fullName: readString(formData, "fullName"),
     email: readString(formData, "email"),

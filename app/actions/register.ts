@@ -10,6 +10,13 @@ import { step1Schema, step2Schema, step3Schema } from "@/lib/validations";
 import { pushRegistrationToSheet } from "@/lib/google-sheets";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 import { isRateLimited } from "@/lib/rate-limit";
+import {
+  deleteS3Object,
+  getS3ObjectMeta,
+  isAllowedDocumentContentType,
+  isAllowedImageContentType,
+  MAX_UPLOAD_SIZE_BYTES,
+} from "@/lib/s3";
 
 // Registration throttle: max submissions allowed per IP within the window.
 const REGISTER_RATE_LIMIT_MAX = 5;
@@ -51,6 +58,37 @@ function mergeFieldErrors(
 function readString(formData: FormData, key: string): string {
   const value = formData.get(key);
   return typeof value === "string" ? value : "";
+}
+
+/**
+ * Verify an uploaded S3 object actually exists and is within the size/type
+ * limits. The browser uploads directly to S3 via a presigned URL, so this is
+ * the authoritative server-side check (the client can lie about size/type).
+ * Oversized or wrong-type objects are deleted. Returns an error message, or
+ * null when the file is valid.
+ */
+async function verifyUploadedFile(
+  key: string,
+  kind: "image" | "document",
+  label: string,
+): Promise<string | null> {
+  const meta = await getS3ObjectMeta(key);
+  if (!meta) {
+    return `${label} upload was not found. Please re-upload and try again.`;
+  }
+  if (meta.contentLength > MAX_UPLOAD_SIZE_BYTES) {
+    await deleteS3Object(key);
+    return `${label} exceeds the 500KB size limit.`;
+  }
+  const typeOk =
+    kind === "image"
+      ? isAllowedImageContentType(meta.contentType)
+      : isAllowedDocumentContentType(meta.contentType);
+  if (!typeOk) {
+    await deleteS3Object(key);
+    return `${label} has an unsupported file type.`;
+  }
+  return null;
 }
 
 export async function submitRegistration(
@@ -164,6 +202,40 @@ export async function submitRegistration(
         },
         message: "This phone number is already registered.",
       };
+    }
+
+    // Authoritatively verify uploaded files exist and are within limits.
+    const paymentKey = step3Parsed.data.paymentScreenshotS3Key.trim();
+    const paymentError = await verifyUploadedFile(
+      paymentKey,
+      "image",
+      "Payment screenshot",
+    );
+    if (paymentError) {
+      return {
+        success: false,
+        errors: { paymentScreenshotS3Key: [paymentError] },
+        message: paymentError,
+      };
+    }
+
+    const ieeeCardKey =
+      step2Parsed.data.isMember && step2Parsed.data.ieeeCardS3Key
+        ? step2Parsed.data.ieeeCardS3Key.trim()
+        : "";
+    if (ieeeCardKey) {
+      const ieeeCardError = await verifyUploadedFile(
+        ieeeCardKey,
+        "document",
+        "IEEE membership card",
+      );
+      if (ieeeCardError) {
+        return {
+          success: false,
+          errors: { ieeeCardS3Key: [ieeeCardError] },
+          message: ieeeCardError,
+        };
+      }
     }
 
     const profileToken = randomBytes(32).toString("hex");

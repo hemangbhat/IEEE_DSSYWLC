@@ -10,6 +10,16 @@
  *   BREVO_FROM_NAME  — Sender display name
  */
 
+/** Escape user-supplied text before interpolating into HTML email bodies. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function getEmailConfig() {
   const apiKey = process.env.BREVO_API_KEY;
   const fromEmail = process.env.BREVO_FROM_EMAIL;
@@ -87,6 +97,7 @@ export async function sendConfirmationEmail(
   const profileUrl = `${getSiteUrl()}/profiles?token=${encodeURIComponent(
     profileToken
   )}`;
+  const safeName = escapeHtml(name);
 
   return sendEmail({
     to,
@@ -103,7 +114,7 @@ export async function sendConfirmationEmail(
     ].join("\n"),
     htmlContent: `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-        <p>Hi ${name},</p>
+        <p>Hi ${safeName},</p>
         <p>Your DSSYWLC '25 registration has been received.</p>
         <p><strong>Status:</strong> Under review</p>
         <p>
@@ -138,9 +149,10 @@ export async function sendStatusUpdateEmail(
   )}`;
 
   const statusInfo = STATUS_LABELS[newStatus] || STATUS_LABELS.under_review;
+  const safeName = escapeHtml(name);
 
   const remarksBlock = remarks
-    ? `<p style="background: #fef3c7; padding: 12px; border-radius: 6px; border-left: 4px solid #d97706;"><strong>Reviewer Remarks:</strong><br/>${remarks}</p>`
+    ? `<p style="background: #fef3c7; padding: 12px; border-radius: 6px; border-left: 4px solid #d97706;"><strong>Reviewer Remarks:</strong><br/>${escapeHtml(remarks)}</p>`
     : "";
 
   return sendEmail({
@@ -161,7 +173,7 @@ export async function sendStatusUpdateEmail(
       .join("\n"),
     htmlContent: `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-        <p>Hi ${name},</p>
+        <p>Hi ${safeName},</p>
         <p>Your DSSYWLC '25 registration status has been updated:</p>
         <p style="font-size: 18px;">
           <strong style="color: ${statusInfo.color};">${statusInfo.label}</strong>

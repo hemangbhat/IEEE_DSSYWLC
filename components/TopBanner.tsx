@@ -6,7 +6,7 @@ export default function TopBanner() {
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-2">
         <span className="text-xl leading-none">⚠️</span>
         <span className="inline-block">
-          Last Day to Register! Registrations close on 17th June 2025.{" "}
+          Registrations close on 17th June 2026.{" "}
           <Link
             href="/register"
             className="underline font-bold hover:text-gray-200 ml-1"

@@ -159,41 +159,21 @@ export default function AccommodationSection() {
             </div>
           </div>
 
-          {/* Contact & Notes */}
-          <div className="bg-[#7B1F34]/5 border-l-4 border-[#7B1F34] rounded-r-xl p-6 mt-10 shadow-sm">
-            <div className="flex items-start gap-3 mb-3">
+          {/* Notes */}
+          <div className="max-w-3xl mx-auto mt-10 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="flex items-start gap-3">
               <span className="material-symbols-outlined text-[#7B1F34] mt-0.5">
                 info
               </span>
               <div className="space-y-2 text-sm text-slate-700">
                 <p className="leading-relaxed">
-                  <strong className="text-slate-800">In-Campus Hostel Update:</strong> On-campus room booking
-                  will be available from the afternoon of the 6th to the afternoon
-                  of the 8th.
+                  <strong className="text-slate-800">In-Campus Hostel Update:</strong>{" "}
+                  For the congress on 20–21 June 2026, on-campus hostel
+                  accommodation availability is to be confirmed by 10th June 2026.
                 </p>
                 <p className="leading-relaxed">
-                  <strong className="text-slate-800">Food Provision:</strong> Meals will be provided only on
-                  the event dates, i.e., 7th and 8th February.
-                </p>
-                <p className="leading-relaxed">
-                  <strong className="text-slate-800">Note:</strong> In the event of an extreme emergency, you
-                  may contact us for last minute assistance.
-                </p>
-              </div>
-            </div>
-            
-            <div className="border-t border-[#7B1F34]/10 pt-4 mt-4">
-              <p className="text-sm text-slate-800 font-bold mb-3">
-                For Accommodation Queries, Contact:
-              </p>
-              <div className="flex flex-wrap gap-x-8 gap-y-2">
-                <p className="text-sm text-gray-700 flex items-center gap-1.5">
-                  <span className="font-semibold text-slate-800">Aditya Mishra:</span>
-                  <span className="text-slate-600 font-medium">88264 90096</span>
-                </p>
-                <p className="text-sm text-gray-700 flex items-center gap-1.5">
-                  <span className="font-semibold text-slate-800">Akshat Kacodia:</span>
-                  <span className="text-slate-600 font-medium">93108 23970</span>
+                  <strong className="text-slate-800">Note:</strong> In the event of an
+                  extreme emergency, you may contact us for last-minute assistance.
                 </p>
               </div>
             </div>

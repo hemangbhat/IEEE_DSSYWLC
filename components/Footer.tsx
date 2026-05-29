@@ -19,7 +19,7 @@ export default function Footer() {
           <img
             src="/logos/ieee-logo.png"
             alt="IEEE Delhi Section SAC"
-            className="h-11 w-auto object-contain"
+            className="h-[55px] w-auto object-contain"
           />
           <div className="bg-white rounded-lg px-3 py-1.5 flex items-center justify-center">
             <img
@@ -56,10 +56,10 @@ export default function Footer() {
                 About
               </Link>
               <Link
-                href="#speakers"
+                href="#guests"
                 className="block text-white/60 text-sm hover:text-white transition-colors"
               >
-                Speakers
+                Guests
               </Link>
               <Link
                 href="#registration"
@@ -114,7 +114,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/40 text-xs">
-            © 2025 – DSSYWLC Delhi Section
+            © 2026 – DSSYWLC Delhi Section
           </p>
 
         </div>

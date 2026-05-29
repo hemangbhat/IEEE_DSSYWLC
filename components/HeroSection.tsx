@@ -58,7 +58,7 @@ export default function HeroSection() {
               <img
                 src="/logos/dssywlc-logo.png"
                 alt="DSSYWLC '25 — IEEE Delhi Section SAC"
-                className="h-12 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
+                className="h-16 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
               />
             </div>
             {/* NSUT Branch */}
@@ -66,7 +66,7 @@ export default function HeroSection() {
               <img
                 src="/logos/ssn-logo.png"
                 alt="IEEE NSUT Student Branch"
-                className="h-10 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
+                className="h-16 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
               />
             </div>
             {/* IEEE */}
@@ -74,7 +74,7 @@ export default function HeroSection() {
               <img
                 src="/logos/ieee-logo.png"
                 alt="IEEE Delhi Section Student Activities Committee"
-                className="h-8 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
+                className="h-16 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
               />
             </div>
             {/* WIE — white pill container so purple logo is visible */}
@@ -83,7 +83,7 @@ export default function HeroSection() {
                 <img
                   src="/logos/wie logo purple.png"
                   alt="IEEE Women in Engineering"
-                  className="h-9 w-auto object-contain"
+                  className="h-16 w-auto object-contain"
                 />
               </div>
             </div>

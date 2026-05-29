@@ -41,10 +41,10 @@ export default function Navbar() {
             About
           </Link>
           <Link
-            href="/#speakers"
+            href="/#guests"
             className="text-sm text-white/80 hover:text-white transition-colors"
           >
-            Speakers
+            Guests
           </Link>
           <Link
             href="/#registration"
@@ -93,11 +93,11 @@ export default function Navbar() {
           About
         </Link>
         <Link
-          href="/#speakers"
+          href="/#guests"
           className="block text-sm text-white/80"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          Speakers
+          Guests
         </Link>
         <Link
           href="/#registration"

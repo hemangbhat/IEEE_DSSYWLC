@@ -787,30 +787,37 @@ export default function RegisterPage() {
               </p>
               <div className="space-y-3 rounded-lg border border-gray-200 bg-gray-50 p-6">
                 <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">Beneficiary Name</span>
+                  <span className="text-sm font-semibold text-slate-800">
+                    {process.env.NEXT_PUBLIC_BENEFICIARY_NAME || "—"}
+                  </span>
+                </div>
+                <div className="border-t border-gray-200" />
+                <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Bank Name</span>
                   <span className="text-sm font-semibold text-slate-800">
-                    State Bank of India
+                    {process.env.NEXT_PUBLIC_BANK_NAME || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Account Number</span>
                   <span className="font-mono text-sm font-semibold text-slate-800">
-                    XXXXXXXXX1234
+                    {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">IFSC Code</span>
                   <span className="font-mono text-sm font-semibold text-slate-800">
-                    SBIN0001234
+                    {process.env.NEXT_PUBLIC_BANK_IFSC_CODE || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm text-gray-500">Bank Address</span>
-                  <span className="max-w-56 text-right text-sm font-semibold text-slate-800">
-                    NSUT Campus Branch, Dwarka, New Delhi
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">Account Type</span>
+                  <span className="text-sm font-semibold text-slate-800">
+                    {process.env.NEXT_PUBLIC_BANK_ACCOUNT_TYPE || "—"}
                   </span>
                 </div>
               </div>

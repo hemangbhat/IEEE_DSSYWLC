@@ -17,9 +17,10 @@ export const metadata: Metadata = {
   title: "DSSYWLC 2025 | IEEE Delhi Section Congress at NSUT",
   description:
     "DSSYWLC 2025 - IEEE Delhi Section Student, YP & WIE Congress. Feb 07-08, 2026 at NSUT, New Delhi. Register now!",
+  metadataBase: new URL("https://dssywlcnsut.in"),
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
   openGraph: {
     title: "DSSYWLC 2025 | IEEE Delhi Section Congress at NSUT",
@@ -50,6 +51,13 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#0a1628" />
+        {/* Speed up the third-party icon-font fetch (DNS/TLS handshake upfront) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"

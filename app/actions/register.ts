@@ -2,7 +2,7 @@
 
 import { randomBytes } from "crypto";
 import { headers } from "next/headers";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { registrations } from "@/lib/db/schema";
 import { sendConfirmationEmail } from "@/lib/email";
@@ -170,14 +170,19 @@ export async function submitRegistration(
   const normalizedPhone = step1Parsed.data.phone.trim();
 
   try {
-    // Check if email already exists
-    const existingEmail = await db
-      .select({ id: registrations.id })
+    // Check for an existing email or phone in a single query.
+    const existing = await db
+      .select({ email: registrations.email, phone: registrations.phone })
       .from(registrations)
-      .where(eq(registrations.email, normalizedEmail))
-      .limit(1);
+      .where(
+        or(
+          eq(registrations.email, normalizedEmail),
+          eq(registrations.phone, normalizedPhone),
+        ),
+      )
+      .limit(2);
 
-    if (existingEmail.length > 0) {
+    if (existing.some((row) => row.email === normalizedEmail)) {
       return {
         success: false,
         errors: {
@@ -187,14 +192,7 @@ export async function submitRegistration(
       };
     }
 
-    // Check if phone number already exists
-    const existingPhone = await db
-      .select({ id: registrations.id })
-      .from(registrations)
-      .where(eq(registrations.phone, normalizedPhone))
-      .limit(1);
-
-    if (existingPhone.length > 0) {
+    if (existing.some((row) => row.phone === normalizedPhone)) {
       return {
         success: false,
         errors: {

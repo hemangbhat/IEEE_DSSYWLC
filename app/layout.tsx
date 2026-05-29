@@ -21,6 +21,23 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  openGraph: {
+    title: "DSSYWLC 2025 | IEEE Delhi Section Congress",
+    description:
+      "Join DSSYWLC 2025 - Delhi Section Student, Young Professionals & Women in Engineering and Life member Congress. February 07-08, 2026 at Netaji Subhas University of Technology (NSUT), Dwarka, New Delhi.",
+    url: "https://ieeensut.com",
+    siteName: "IEEE NSUT",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "DSSYWLC 2025 - IEEE Delhi Section Congress",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

@@ -147,11 +147,8 @@ export default function AccommodationSection() {
                         {hotel.contact ? (
                           <a
                             href={`tel:${hotel.contact.replace(/\s/g, "")}`}
-                            className="inline-flex items-center gap-1.5 px-3 py-2 border border-[#7B1F34]/20 rounded-lg text-sm font-semibold text-[#7B1F34] hover:bg-[#7B1F34] hover:text-white transition-all duration-200"
+                            className="text-[#7B1F34] text-sm font-semibold hover:underline"
                           >
-                            <span className="material-symbols-outlined text-sm">
-                              phone
-                            </span>
                             {hotel.contact}
                           </a>
                         ) : (

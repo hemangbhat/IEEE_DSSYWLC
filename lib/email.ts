@@ -123,7 +123,7 @@ export async function sendConfirmationEmail(
         </p>
         <p>Thank you for registering for DSSYWLC '25.</p>
         <p style="margin-top: 24px; color: #6b7280; font-size: 13px;">
-          Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Members Congress
+          Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Member Congress
         </p>
       </div>
     `,
@@ -184,7 +184,7 @@ export async function sendStatusUpdateEmail(
           <a href="${profileUrl}">${profileUrl}</a>
         </p>
         <p style="margin-top: 24px; color: #6b7280; font-size: 13px;">
-          Delhi Section Student, Young Professionals, Women in Engineering & Life Members Congress
+          Delhi Section Student, Young Professionals, Women in Engineering & Life Member Congress
         </p>
       </div>
     `,

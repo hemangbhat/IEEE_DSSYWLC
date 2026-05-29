@@ -9,8 +9,8 @@ export default function RegistrationSection() {
             Registration Plans
           </h2>
           <p className="text-gray-500 mb-4">
-            Choose the plan that suits you best. Early bird registration ends
-            soon.
+            Choose the plan that suits you best. Secure your spot before
+            registrations close.
           </p>
           <div className="w-16 h-0.5 bg-[#7B1F34] mx-auto"></div>
         </div>

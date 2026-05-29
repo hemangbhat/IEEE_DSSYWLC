@@ -37,12 +37,9 @@ export default function Footer() {
               Delhi Section
             </p>
             <p className="text-white/60 text-sm leading-relaxed">
-              IEEE Section Student, Young Professionals &amp; Women in
-              Engineering and Life member Congress.
+              Delhi Section Student, Young Professionals &amp; Women in
+              Engineering and Life Member Congress.
             </p>
-            <div className="mt-4 text-sm text-white/70">
-              <p>📞 +91 871 128 2398</p>
-            </div>
           </div>
           <div>
             <h4 className="font-bold text-sm mb-3 uppercase tracking-wider">

@@ -178,3 +178,92 @@ export async function sendStatusUpdateEmail(
     `,
   });
 }
+
+// ──── Bulk / Team Registration Emails ────
+
+export async function sendBulkLeaderConfirmationEmail(
+  to: string,
+  leaderName: string,
+  profileToken: string,
+  teamSize: number
+): Promise<boolean> {
+  const profileUrl = `${getSiteUrl()}/profiles?token=${encodeURIComponent(
+    profileToken
+  )}`;
+
+  return sendEmail({
+    to,
+    subject: "DSSYWLC '25 — Team Registration Received",
+    textContent: [
+      `Hi ${leaderName},`,
+      "",
+      `Your team registration for DSSYWLC '25 has been received.`,
+      `You registered a team of ${teamSize} members (including yourself).`,
+      "Current status: Under review",
+      "",
+      `Track your profile here: ${profileUrl}`,
+      "",
+      "Confirmation emails have been sent to all team members.",
+      "",
+      "DSSYWLC '25",
+    ].join("\n"),
+    htmlContent: `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
+        <p>Hi ${leaderName},</p>
+        <p>Your team registration for DSSYWLC '25 has been received.</p>
+        <p>You registered a team of <strong>${teamSize} members</strong> (including yourself).</p>
+        <p><strong>Status:</strong> Under review</p>
+        <p>
+          View your registration profile:<br />
+          <a href="${profileUrl}">${profileUrl}</a>
+        </p>
+        <p style="color: #6b7280; font-size: 13px;">
+          Confirmation emails have been sent to all team members.
+        </p>
+        <p style="margin-top: 24px; color: #6b7280; font-size: 13px;">
+          Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Members Congress
+        </p>
+      </div>
+    `,
+  });
+}
+
+export async function sendBulkMemberConfirmationEmail(
+  to: string,
+  memberName: string,
+  profileToken: string,
+  leaderName: string
+): Promise<boolean> {
+  const profileUrl = `${getSiteUrl()}/profiles?token=${encodeURIComponent(
+    profileToken
+  )}`;
+
+  return sendEmail({
+    to,
+    subject: "DSSYWLC '25 — You've Been Registered!",
+    textContent: [
+      `Hi ${memberName},`,
+      "",
+      `You have been registered for DSSYWLC '25 by ${leaderName}.`,
+      "Current status: Under review",
+      "",
+      `Track your profile here: ${profileUrl}`,
+      "",
+      "DSSYWLC '25",
+    ].join("\n"),
+    htmlContent: `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
+        <p>Hi ${memberName},</p>
+        <p>You have been registered for DSSYWLC '25 by <strong>${leaderName}</strong>.</p>
+        <p><strong>Status:</strong> Under review</p>
+        <p>
+          View your registration profile:<br />
+          <a href="${profileUrl}">${profileUrl}</a>
+        </p>
+        <p style="margin-top: 24px; color: #6b7280; font-size: 13px;">
+          Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Members Congress
+        </p>
+      </div>
+    `,
+  });
+}

@@ -14,7 +14,7 @@ export const registrations = pgTable(
     profileToken: text("profile_token").notNull().unique(),
     fullName: text("full_name").notNull(),
     email: text("email").notNull().unique(),
-    phone: text("phone").notNull(),
+    phone: text("phone").notNull().unique(),
     affiliation: text("affiliation").notNull(),
     category: text("category").notNull(), // student_member | graduate_student_member | professional_member | faculty_member
     referralCode: text("referral_code"),

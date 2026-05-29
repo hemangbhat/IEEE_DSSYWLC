@@ -1,12 +1,35 @@
 "use server";
 
 import { randomBytes } from "crypto";
-import { eq } from "drizzle-orm";
+import { headers } from "next/headers";
+import { eq, or } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { registrations } from "@/lib/db/schema";
 import { sendConfirmationEmail } from "@/lib/email";
 import { step1Schema, step2Schema, step3Schema } from "@/lib/validations";
 import { pushRegistrationToSheet } from "@/lib/google-sheets";
+import { verifyTurnstileToken } from "@/lib/turnstile";
+import { isRateLimited } from "@/lib/rate-limit";
+import {
+  deleteS3Object,
+  getS3ObjectMeta,
+  isAllowedDocumentContentType,
+  isAllowedImageContentType,
+  MAX_UPLOAD_SIZE_BYTES,
+} from "@/lib/s3";
+
+// Registration throttle: max submissions allowed per IP within the window.
+const REGISTER_RATE_LIMIT_MAX = 5;
+const REGISTER_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+
+async function getClientIp(): Promise<string> {
+  const headerList = await headers();
+  const forwardedFor = headerList.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() || "unknown";
+  }
+  return headerList.get("x-real-ip") || "unknown";
+}
 
 export type RegisterState = {
   success: boolean;
@@ -37,10 +60,75 @@ function readString(formData: FormData, key: string): string {
   return typeof value === "string" ? value : "";
 }
 
+/**
+ * Verify an uploaded S3 object actually exists and is within the size/type
+ * limits. The browser uploads directly to S3 via a presigned URL, so this is
+ * the authoritative server-side check (the client can lie about size/type).
+ * Oversized or wrong-type objects are deleted. Returns an error message, or
+ * null when the file is valid.
+ */
+async function verifyUploadedFile(
+  key: string,
+  kind: "image" | "document",
+  label: string,
+): Promise<string | null> {
+  const meta = await getS3ObjectMeta(key);
+  if (!meta) {
+    return `${label} upload was not found. Please re-upload and try again.`;
+  }
+  if (meta.contentLength > MAX_UPLOAD_SIZE_BYTES) {
+    await deleteS3Object(key);
+    return `${label} exceeds the 500KB size limit.`;
+  }
+  const typeOk =
+    kind === "image"
+      ? isAllowedImageContentType(meta.contentType)
+      : isAllowedDocumentContentType(meta.contentType);
+  if (!typeOk) {
+    await deleteS3Object(key);
+    return `${label} has an unsupported file type.`;
+  }
+  return null;
+}
+
 export async function submitRegistration(
   _prevState: RegisterState,
   formData: FormData,
 ): Promise<RegisterState> {
+  const clientIp = await getClientIp();
+
+  // Throttle by IP (defence-in-depth; primary protection is the CAPTCHA below).
+  if (
+    clientIp !== "unknown" &&
+    isRateLimited(
+      "register",
+      clientIp,
+      REGISTER_RATE_LIMIT_MAX,
+      REGISTER_RATE_LIMIT_WINDOW_MS,
+    )
+  ) {
+    return {
+      success: false,
+      message:
+        "Too many registration attempts. Please wait a few minutes and try again.",
+    };
+  }
+
+  // Verify CAPTCHA before doing any DB/email/Sheets work.
+  // No-op when Turnstile is not configured (site behaves as before).
+  const turnstileToken = readString(formData, "cf-turnstile-response");
+  const captchaOk = await verifyTurnstileToken(
+    turnstileToken,
+    clientIp === "unknown" ? undefined : clientIp,
+  );
+  if (!captchaOk) {
+    return {
+      success: false,
+      message:
+        "CAPTCHA verification failed. Please complete the challenge and try again.",
+    };
+  }
+
   const step1Input = {
     fullName: readString(formData, "fullName"),
     email: readString(formData, "email"),
@@ -82,14 +170,19 @@ export async function submitRegistration(
   const normalizedPhone = step1Parsed.data.phone.trim();
 
   try {
-    // Check if email already exists
-    const existingEmail = await db
-      .select({ id: registrations.id })
+    // Check for an existing email or phone in a single query.
+    const existing = await db
+      .select({ email: registrations.email, phone: registrations.phone })
       .from(registrations)
-      .where(eq(registrations.email, normalizedEmail))
-      .limit(1);
+      .where(
+        or(
+          eq(registrations.email, normalizedEmail),
+          eq(registrations.phone, normalizedPhone),
+        ),
+      )
+      .limit(2);
 
-    if (existingEmail.length > 0) {
+    if (existing.some((row) => row.email === normalizedEmail)) {
       return {
         success: false,
         errors: {
@@ -99,14 +192,7 @@ export async function submitRegistration(
       };
     }
 
-    // Check if phone number already exists
-    const existingPhone = await db
-      .select({ id: registrations.id })
-      .from(registrations)
-      .where(eq(registrations.phone, normalizedPhone))
-      .limit(1);
-
-    if (existingPhone.length > 0) {
+    if (existing.some((row) => row.phone === normalizedPhone)) {
       return {
         success: false,
         errors: {
@@ -114,6 +200,40 @@ export async function submitRegistration(
         },
         message: "This phone number is already registered.",
       };
+    }
+
+    // Authoritatively verify uploaded files exist and are within limits.
+    const paymentKey = step3Parsed.data.paymentScreenshotS3Key.trim();
+    const paymentError = await verifyUploadedFile(
+      paymentKey,
+      "image",
+      "Payment screenshot",
+    );
+    if (paymentError) {
+      return {
+        success: false,
+        errors: { paymentScreenshotS3Key: [paymentError] },
+        message: paymentError,
+      };
+    }
+
+    const ieeeCardKey =
+      step2Parsed.data.isMember && step2Parsed.data.ieeeCardS3Key
+        ? step2Parsed.data.ieeeCardS3Key.trim()
+        : "";
+    if (ieeeCardKey) {
+      const ieeeCardError = await verifyUploadedFile(
+        ieeeCardKey,
+        "document",
+        "IEEE membership card",
+      );
+      if (ieeeCardError) {
+        return {
+          success: false,
+          errors: { ieeeCardS3Key: [ieeeCardError] },
+          message: ieeeCardError,
+        };
+      }
     }
 
     const profileToken = randomBytes(32).toString("hex");

@@ -19,7 +19,7 @@ export default function Footer() {
           <img
             src="/logos/ieee-logo.png"
             alt="IEEE Delhi Section SAC"
-            className="h-11 w-auto object-contain"
+            className="h-[55px] w-auto object-contain"
           />
           <div className="bg-white rounded-lg px-3 py-1.5 flex items-center justify-center">
             <img
@@ -37,12 +37,9 @@ export default function Footer() {
               Delhi Section
             </p>
             <p className="text-white/60 text-sm leading-relaxed">
-              IEEE Section Student, Young Professionals &amp; Women in
-              Engineering and Life member Congress.
+              Delhi Section Student, Young Professionals &amp; Women in
+              Engineering and Life Member Congress.
             </p>
-            <div className="mt-4 text-sm text-white/70">
-              <p>📞 +91 871 128 2398</p>
-            </div>
           </div>
           <div>
             <h4 className="font-bold text-sm mb-3 uppercase tracking-wider">
@@ -56,10 +53,10 @@ export default function Footer() {
                 About
               </Link>
               <Link
-                href="#speakers"
+                href="#guests"
                 className="block text-white/60 text-sm hover:text-white transition-colors"
               >
-                Speakers
+                Guests
               </Link>
               <Link
                 href="#registration"
@@ -114,7 +111,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/40 text-xs">
-            © 2025 – DSSYWLC Delhi Section
+            © 2026 – DSSYWLC Delhi Section
           </p>
 
         </div>

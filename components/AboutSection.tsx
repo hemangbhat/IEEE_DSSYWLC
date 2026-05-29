@@ -22,11 +22,11 @@ export default function AboutSection() {
             technological advancement.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            IEEE Delhi Section is a paramount multi-based hyperstream, third
-            city, and overarching young professionals and women in the congress
-            to summarized securitization. Bilateral strategies translated to
-            IEEE Delhi, visionary, engagement and ensure and to prominent
-            reorganizations, repairs, clients and data, and pre-optimization.
+            DSSYWLC brings these communities together under one roof — through
+            technical sessions, panel discussions, leadership talks, and
+            cultural events — to celebrate engineering excellence and build
+            lasting connections across generations. Join us to learn, network,
+            and be part of a vibrant IEEE community.
           </p>
         </div>
       </div>

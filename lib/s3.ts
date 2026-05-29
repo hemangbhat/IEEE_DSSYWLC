@@ -1,5 +1,10 @@
 import { randomBytes } from "crypto";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  DeleteObjectCommand,
+  HeadObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const MAX_UPLOAD_SIZE_BYTES = 500 * 1024;
@@ -117,6 +122,43 @@ export async function generatePresignedUploadUrl({
   const url = await getSignedUrl(getS3Client(), command, { expiresIn: 300 });
 
   return { url, key };
+}
+
+/**
+ * Fetch metadata (size + content type) for an uploaded object.
+ * Returns null if the object does not exist (or on error).
+ */
+export async function getS3ObjectMeta(
+  key: string
+): Promise<{ contentLength: number; contentType: string } | null> {
+  try {
+    const result = await getS3Client().send(
+      new HeadObjectCommand({
+        Bucket: requiredEnv("S3_BUCKET_NAME"),
+        Key: key,
+      })
+    );
+    return {
+      contentLength: result.ContentLength ?? 0,
+      contentType: result.ContentType ?? "",
+    };
+  } catch {
+    return null;
+  }
+}
+
+/** Delete an S3 object. Best-effort; logs but does not throw on failure. */
+export async function deleteS3Object(key: string): Promise<void> {
+  try {
+    await getS3Client().send(
+      new DeleteObjectCommand({
+        Bucket: requiredEnv("S3_BUCKET_NAME"),
+        Key: key,
+      })
+    );
+  } catch (error) {
+    console.error("Failed to delete S3 object:", key, error);
+  }
 }
 
 /** Build a permanent public URL for an S3 object given its key. */

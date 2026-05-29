@@ -8,7 +8,7 @@ export default function FaqSection() {
   const faqs = [
     {
       q: "How can I register for the event?",
-      a: "You can register directly through the 'Register Now' buttons on this website. Registration is handled via our secure IEEE portal.",
+      a: "You can register directly through the 'Register Now' buttons on this website. Registration is handled securely on this site.",
     },
     {
       q: "Is the registration fee refundable?",

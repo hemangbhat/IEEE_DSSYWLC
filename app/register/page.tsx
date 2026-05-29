@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useMemo, useState } from "react";
+import Script from "next/script";
+import {
+  useActionState,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { z } from "zod";
 import { submitRegistration, type RegisterState } from "@/app/actions/register";
 import {
@@ -12,6 +19,30 @@ import {
 } from "@/lib/validations";
 
 const initialSubmitState: RegisterState = { success: false };
+
+// Public Turnstile site key. When unset, the CAPTCHA is disabled and the
+// form behaves exactly as before (server-side verification also no-ops).
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+type TurnstileApi = {
+  render: (
+    el: HTMLElement,
+    options: {
+      sitekey: string;
+      callback?: (token: string) => void;
+      "expired-callback"?: () => void;
+      "error-callback"?: () => void;
+      "response-field"?: boolean;
+    },
+  ) => string;
+  remove: (widgetId: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
 const MAX_UPLOAD_SIZE_BYTES = 500 * 1024;
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 const ALLOWED_DOCUMENT_TYPES = [
@@ -186,6 +217,45 @@ export default function RegisterPage() {
   const [ieeeCardFileName, setIeeeCardFileName] = useState("");
   const [paymentFileName, setPaymentFileName] = useState("");
 
+  // Turnstile CAPTCHA state
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  // Render / clean up the Turnstile widget when the user is on the payment step.
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) {
+      return;
+    }
+    if (step !== 3 || !turnstileReady || !window.turnstile) {
+      return;
+    }
+    const container = turnstileRef.current;
+    if (!container || widgetIdRef.current !== null) {
+      return;
+    }
+
+    widgetIdRef.current = window.turnstile.render(container, {
+      sitekey: TURNSTILE_SITE_KEY,
+      "response-field": false, // token is submitted via our own hidden input
+      callback: (token: string) => {
+        setTurnstileToken(token);
+        clearFieldError("captcha");
+      },
+      "expired-callback": () => setTurnstileToken(""),
+      "error-callback": () => setTurnstileToken(""),
+    });
+
+    return () => {
+      if (widgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+      }
+      widgetIdRef.current = null;
+      setTurnstileToken("");
+    };
+  }, [step, turnstileReady]);
+
   const serverErrors = useMemo(() => {
     const mapped: Record<string, string> = {};
     const submitErrors =
@@ -351,6 +421,15 @@ export default function RegisterPage() {
       return;
     }
 
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      event.preventDefault();
+      setFieldErrors((prev) => ({
+        ...prev,
+        captcha: "Please complete the CAPTCHA challenge before submitting.",
+      }));
+      return;
+    }
+
     const finalPayload = {
       ...step1,
       ...step2,
@@ -428,6 +507,13 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-[#f0f4f8] px-4 py-12">
+      {TURNSTILE_SITE_KEY && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          strategy="afterInteractive"
+          onLoad={() => setTurnstileReady(true)}
+        />
+      )}
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 text-center">
           <h1 className="mb-2 text-3xl font-bold text-slate-800">
@@ -786,37 +872,37 @@ export default function RegisterPage() {
                 UTR or transaction screenshot above.
               </p>
               <div className="space-y-3 rounded-lg border border-gray-200 bg-gray-50 p-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm text-gray-500">Beneficiary Name</span>
-                  <span className="text-sm font-semibold text-slate-800">
+                  <span className="text-right text-sm font-semibold text-slate-800">
                     {process.env.NEXT_PUBLIC_BENEFICIARY_NAME || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm text-gray-500">Bank Name</span>
-                  <span className="text-sm font-semibold text-slate-800">
+                  <span className="text-right text-sm font-semibold text-slate-800">
                     {process.env.NEXT_PUBLIC_BANK_NAME || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm text-gray-500">Account Number</span>
                   <span className="font-mono text-sm font-semibold text-slate-800">
                     {process.env.NEXT_PUBLIC_BANK_ACCOUNT_NUMBER || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm text-gray-500">IFSC Code</span>
                   <span className="font-mono text-sm font-semibold text-slate-800">
                     {process.env.NEXT_PUBLIC_BANK_IFSC_CODE || "—"}
                   </span>
                 </div>
                 <div className="border-t border-gray-200" />
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm text-gray-500">Account Type</span>
-                  <span className="text-sm font-semibold text-slate-800">
+                  <span className="text-right text-sm font-semibold text-slate-800">
                     {process.env.NEXT_PUBLIC_BANK_ACCOUNT_TYPE || "—"}
                   </span>
                 </div>
@@ -854,6 +940,22 @@ export default function RegisterPage() {
               name="paymentScreenshotS3Key"
               value={step3.paymentScreenshotS3Key}
             />
+            <input
+              type="hidden"
+              name="cf-turnstile-response"
+              value={turnstileToken}
+            />
+
+            {TURNSTILE_SITE_KEY && (
+              <div>
+                <div ref={turnstileRef} className="flex justify-center" />
+                {errors.captcha && (
+                  <p className="mt-2 text-center text-xs text-red-500">
+                    {errors.captcha}
+                  </p>
+                )}
+              </div>
+            )}
 
             <div className="flex gap-4">
               <button
@@ -866,7 +968,10 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={
-                  isSubmitting || uploading.payment || uploading.ieeeCard
+                  isSubmitting ||
+                  uploading.payment ||
+                  uploading.ieeeCard ||
+                  (!!TURNSTILE_SITE_KEY && !turnstileToken)
                 }
                 className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#7B1F34] py-3 text-sm font-bold text-white transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
               >

@@ -1,10 +1,11 @@
-export default function SpeakersSection() {
-  const speakers = [
-    {
-      name: "Prof. Anand Srivastava",
-      role: "Vice Chancellor, NSUT",
-      img: "/speakers/vc-nsut.png",
-    },
+export default function GuestsSection() {
+  const guests = [
+    // Hidden for now — keep details/image to re-add later.
+    // {
+    //   name: "Prof. Anand Srivastava",
+    //   role: "Vice Chancellor, NSUT",
+    //   img: "/speakers/vc-nsut.png",
+    // },
     {
       name: "Prof. Prerna Gaur",
       role: "Chair — IEEE India Council",
@@ -22,47 +23,42 @@ export default function SpeakersSection() {
     },
     {
       name: "Mr. Deepak Mathur",
-      role: "Director — IEEE Region 10",
+      role: "Past VP — IEEE Member & Geographic Activities",
       img: "/speakers/deepak-mathur.png",
     },
     {
       name: "Dr. S.S. Jamuar",
       role: "Delhi Section LMAG Secretary",
-      img: "",
+      img: "/speakers/sudhanshujamuar.jpg",
     },
     {
       name: "Ms. Sneha Kabra",
       role: "Secretary — IEEE Delhi Section",
-      img: "https://res.cloudinary.com/dlia5xgwx/image/upload/v1770186781/snehakabra_xf0qis.jpg",
-    },
-    {
-      name: "Prof. Arti M K",
-      role: "Dean (Student Welfare), NSUT",
-      img: "",
+      img: "/speakers/sneha-kabra.jpeg",
     },
   ];
 
   return (
-    <section className="py-20 bg-white" id="speakers">
+    <section className="py-20 bg-white" id="guests">
       <div className="section-container">
         <div className="text-center mb-16 animate-on-scroll">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">
-            Distinguished Speakers
+            Distinguished Guests
           </h2>
           <div className="w-16 h-0.5 bg-[#7B1F34] mx-auto"></div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 max-w-5xl mx-auto animate-on-scroll">
-          {speakers.map((speaker, i) => (
+          {guests.map((guest, i) => (
             <div
               key={i}
               className="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-lg transition-shadow"
             >
               <div className="w-28 h-28 mx-auto mb-5 rounded-full overflow-hidden border-4 border-white shadow-md bg-slate-100 flex items-center justify-center">
-                {speaker.img ? (
+                {guest.img ? (
                   <img
-                    src={speaker.img}
-                    alt={speaker.name}
+                    src={guest.img}
+                    alt={guest.name}
                     className="w-full h-full object-cover"
                   />
                 ) : (
@@ -72,10 +68,10 @@ export default function SpeakersSection() {
                 )}
               </div>
               <h3 className="text-slate-800 font-bold text-sm mb-1">
-                {speaker.name}
+                {guest.name}
               </h3>
               <p className="text-[#7B1F34] text-xs leading-relaxed">
-                {speaker.role}
+                {guest.role}
               </p>
             </div>
           ))}

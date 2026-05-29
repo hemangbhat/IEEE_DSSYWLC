@@ -3,7 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import StatsBar from "@/components/StatsBar";
 import AboutSection from "@/components/AboutSection";
 import HostInstitution from "@/components/HostInstitution";
-import SpeakersSection from "@/components/SpeakersSection";
+import GuestsSection from "@/components/GuestsSection";
 import RegistrationSection from "@/components/RegistrationSection";
 import ScheduleSection from "@/components/ScheduleSection";
 import AccommodationSection from "@/components/AccommodationSection";
@@ -23,7 +23,7 @@ export default function Home() {
       <StatsBar />
       <AboutSection />
       <HostInstitution />
-      <SpeakersSection />
+      <GuestsSection />
       <RegistrationSection />
       <ScheduleSection />
       <AccommodationSection />

@@ -26,61 +26,63 @@ export default function ContactSection() {
 
               <div>
                 <h4 className="text-slate-800 font-bold text-sm mb-2">
-                  Contact
-                </h4>
-                <a
-                  href="tel:+911125099017"
-                  className="text-[#7B1F34] text-sm font-semibold hover:underline"
-                >
-                  +91 11 2509 9017
-                </a>
-                <p className="text-gray-400 text-xs mt-1">
-                  9:30 AM to 6:00 PM, Mon–Fri
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-slate-800 font-bold text-sm mb-2">
                   General Inquiries
                 </h4>
                 <a
-                  href="mailto:academic@nsut.ac.in"
+                  href="mailto:ieee@nsut.ac.in"
                   className="text-[#7B1F34] text-sm font-semibold hover:underline"
                 >
-                  academic@nsut.ac.in
+                  ieee@nsut.ac.in
                 </a>
               </div>
 
-              {/* Coordinators */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
-                <div>
-                  <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">
-                    IEEE Student Branch Representatives
-                  </h5>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <p>
-                      Aditya Mishra — <span className="font-semibold text-slate-800">88264 90096</span>
-                    </p>
-                    <p>
-                      Akshat Kacodia — <span className="font-semibold text-slate-800">93108 23970</span>
-                    </p>
-                  </div>
+              {/* Mentors */}
+              <div className="pt-4 border-t border-gray-100">
+                <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">
+                  Mentors
+                </h5>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <p>Rishabh Jha</p>
+                  <p>Spruha Kar</p>
+                  <p>Aradhna Aggarwal</p>
+                  <p>Nyasha Saurabh</p>
                 </div>
+              </div>
+
+              {/* Representatives */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
                 <div>
                   <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">
                     IEEE Section Student Representatives
                   </h5>
                   <div className="space-y-2 text-sm text-gray-600">
                     <p>
-                      Garima Singh — <span className="font-semibold text-slate-800">95608 84883</span>
+                      Garima Singh
+                      <br />
+                      <span className="font-semibold text-slate-800">95608 84883</span>
                     </p>
                     <p>
-                      Shubham Gupta — <span className="font-semibold text-slate-800">96679 79306</span>
+                      Shubham Gupta
+                      <br />
+                      <span className="font-semibold text-slate-800">96679 79306</span>
                     </p>
-                    <p>Rishabh Jha</p>
-                    <p>Spruha Kar</p>
-                    <p>Aradhna Aggarwal</p>
-                    <p>Nyasha Saurabh</p>
+                  </div>
+                </div>
+                <div>
+                  <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">
+                    IEEE Student Branch Representatives
+                  </h5>
+                  <div className="space-y-2 text-sm text-gray-600">
+                    <p>
+                      Aditya Mishra (Chairperson)
+                      <br />
+                      <span className="font-semibold text-slate-800">88264 90096</span>
+                    </p>
+                    <p>
+                      Akshat Kacodia (Vice-Chairperson)
+                      <br />
+                      <span className="font-semibold text-slate-800">93108 23970</span>
+                    </p>
                   </div>
                 </div>
               </div>

@@ -25,14 +25,12 @@ export default function ScheduleSection() {
       title: "Inauguration Ceremony",
       description: "Formal welcome & inaugural addresses",
       speakers: [
-        "Prof. Anand Srivastava, Vice Chancellor NSUT",
         "Prof. Prerna Gaur, Chair — IEEE India Council",
         "Dr. Preeti Bajaj, Chair-Elect — IEEE India Council",
         "Prof. M.N. Hoda, Chairperson — IEEE Delhi Section",
-        "Mr. Deepak Mathur, Director — IEEE Region 10",
+        "Mr. Deepak Mathur, Past VP — IEEE Member & Geographic Activities",
         "Dr. S.S. Jamuar, Delhi Section LMAG Secretary",
         "Ms. Sneha Kabra, Secretary — IEEE Delhi Section",
-        "DSW Ma'am",
       ],
       highlight: true,
     },
@@ -188,7 +186,7 @@ export default function ScheduleSection() {
                   : "bg-white text-slate-600 hover:bg-gray-50"
               }`}
             >
-              Day 1 — Feb 7
+              Day 1 — June 20
             </button>
             <button
               onClick={() => setActiveDay(2)}
@@ -198,7 +196,7 @@ export default function ScheduleSection() {
                   : "bg-white text-slate-600 hover:bg-gray-50"
               }`}
             >
-              Day 2 — Feb 8
+              Day 2 — June 21
             </button>
           </div>
         </div>

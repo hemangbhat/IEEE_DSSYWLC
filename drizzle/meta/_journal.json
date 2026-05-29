@@ -15,6 +15,13 @@
       "when": 1777036800000,
       "tag": "0001_registration_refactor",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780062214018,
+      "tag": "0002_phone_unique",
+      "breakpoints": true
     }
   ]
 }

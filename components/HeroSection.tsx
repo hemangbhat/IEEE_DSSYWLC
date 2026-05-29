@@ -10,14 +10,17 @@ export default function HeroSection() {
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/logos/image.webp')" }}
         />
+        {/* Legibility scrim: darker behind the left-aligned text, fades to
+            transparent over India Gate so the photo stays vivid on the right */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
         <div className="relative z-10 section-container animate-on-scroll">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl  lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.9)" }}>
+            <h1 className="text-4xl md:text-5xl  lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
               Delhi Section Student, Young Professionals &amp; Women in
-              Engineering and Life member Congress
+              Engineering and Life Member Congress
             </h1>
 
-            <p className="text-lg text-white/80 max-w-2xl mb-10 leading-relaxed" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.8)" }}>
+            <p className="text-lg text-white/90 max-w-2xl mb-10 leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
               Converging young minds, visionary women engineers, and distinguished
               life members for a future of innovation.
             </p>

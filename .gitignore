@@ -55,6 +55,13 @@ dssywlc-main.zip
 *.mkv
 *.heic
 
+# ...but media that lives in public/ MUST be committed so it deploys
+!public/**/*.mp4
+!public/**/*.mov
+!public/**/*.avi
+!public/**/*.mkv
+!public/**/*.heic
+
 # Test / debug scripts
 test-*.cjs
 test-*.mjs

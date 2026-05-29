@@ -8,7 +8,7 @@ export default function HeroSection() {
         {/* Background Image with normal brightness */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/logos/image.png')" }}
+          style={{ backgroundImage: "url('/logos/image.webp')" }}
         />
         <div className="relative z-10 section-container animate-on-scroll">
           <div className="max-w-3xl">

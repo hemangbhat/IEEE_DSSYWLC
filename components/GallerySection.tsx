@@ -37,7 +37,7 @@ const gallery2023: GalleryItem[] = [
     type: "image",
   },
   {
-    src: "/gallery/2023/keynote_video.mov",
+    src: "/gallery/2023/keynote_video.mp4",
     category: "Keynote Session",
     day: "Day 1",
     type: "video",

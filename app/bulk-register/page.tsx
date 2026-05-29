@@ -1328,19 +1328,7 @@ export default function BulkRegisterPage() {
               </div>
             </div>
 
-            {/* Price Summary */}
-            {totalPrice > 0 && (
-              <div className="rounded-lg border border-[#7B1F34]/20 bg-[#7B1F34]/5 p-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-slate-700">
-                    Estimated Total ({1 + members.length} members)
-                  </span>
-                  <span className="text-xl font-bold text-[#7B1F34]">
-                    ₹{totalPrice.toLocaleString("en-IN")}
-                  </span>
-                </div>
-              </div>
-            )}
+
 
             <div className="flex gap-4">
               <button
@@ -1368,17 +1356,7 @@ export default function BulkRegisterPage() {
             onSubmit={handleFinalSubmit}
             className="space-y-8 rounded-xl bg-white p-8 shadow-lg"
           >
-            {/* Price Summary */}
-            <div className="rounded-lg border border-[#7B1F34]/20 bg-[#7B1F34]/5 p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-slate-700">
-                  Total for {1 + members.length} members
-                </span>
-                <span className="text-xl font-bold text-[#7B1F34]">
-                  ₹{totalPrice.toLocaleString("en-IN")}
-                </span>
-              </div>
-            </div>
+
 
             <div>
               <h3 className="mb-4 text-lg font-bold text-slate-800">

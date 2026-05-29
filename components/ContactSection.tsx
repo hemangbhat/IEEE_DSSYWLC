@@ -80,11 +80,31 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h5 className="text-slate-700 font-bold text-xs uppercase tracking-wider mb-3">
-                    IEEE Student Section Representatives
+                    IEEE Section Student Representatives
                   </h5>
                   <div className="space-y-2 text-sm text-gray-600">
-                    <p>Garima Singh</p>
-                    <p>Shubham Gupta</p>
+                    <p>
+                      Garima Singh —{" "}
+                      <a
+                        href="tel:+919560884883"
+                        className="text-[#7B1F34] hover:underline font-semibold"
+                      >
+                        95608 84883
+                      </a>
+                    </p>
+                    <p>
+                      Shubham Gupta —{" "}
+                      <a
+                        href="tel:+919667979306"
+                        className="text-[#7B1F34] hover:underline font-semibold"
+                      >
+                        96679 79306
+                      </a>
+                    </p>
+                    <p>Rishabh Jha</p>
+                    <p>Spruha Kar</p>
+                    <p>Aradhna Aggarwal</p>
+                    <p>Nyasha Saurabh</p>
                   </div>
                 </div>
               </div>

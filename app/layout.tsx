@@ -14,25 +14,25 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "DSSYWLC 2025 | IEEE Delhi Section Congress",
+  title: "DSSYWLC 2025 | IEEE Delhi Section Congress at NSUT",
   description:
-    "Join DSSYWLC 2025 - Delhi Section Student, Young Professionals & Women in Engineering and Life member Congress. February 07-08, 2026 at Netaji Subhas University of Technology (NSUT), Dwarka, New Delhi.",
+    "DSSYWLC 2025 - IEEE Delhi Section Student, YP & WIE Congress. Feb 07-08, 2026 at NSUT, New Delhi. Register now!",
   robots: {
     index: false,
     follow: false,
   },
   openGraph: {
-    title: "DSSYWLC 2025 | IEEE Delhi Section Congress",
+    title: "DSSYWLC 2025 | IEEE Delhi Section Congress at NSUT",
     description:
-      "Join DSSYWLC 2025 - Delhi Section Student, Young Professionals & Women in Engineering and Life member Congress. February 07-08, 2026 at Netaji Subhas University of Technology (NSUT), Dwarka, New Delhi.",
-    url: "https://ieeensut.com",
-    siteName: "IEEE NSUT",
+      "DSSYWLC 2025 - IEEE Delhi Section Student, YP & WIE Congress. Feb 07-08, 2026 at NSUT, New Delhi. Register now!",
+    url: "https://dssywlcnsut.in",
+    siteName: "IEEE NSUT - DSSYWLC",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://dssywlcnsut.in/og-image.png",
         width: 1200,
         height: 630,
-        alt: "DSSYWLC 2025 - IEEE Delhi Section Congress",
+        alt: "DSSYWLC 2025 - IEEE Delhi Section Congress at NSUT",
       },
     ],
     locale: "en_IN",

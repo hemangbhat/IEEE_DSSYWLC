@@ -59,22 +59,10 @@ export default function ContactSection() {
                   </h5>
                   <div className="space-y-2 text-sm text-gray-600">
                     <p>
-                      Aditya Mishra —{" "}
-                      <a
-                        href="tel:+918826490096"
-                        className="text-[#7B1F34] hover:underline"
-                      >
-                        88264 90096
-                      </a>
+                      Aditya Mishra — <span className="font-semibold text-slate-800">88264 90096</span>
                     </p>
                     <p>
-                      Akshat Kacodia —{" "}
-                      <a
-                        href="tel:+919310823970"
-                        className="text-[#7B1F34] hover:underline"
-                      >
-                        93108 23970
-                      </a>
+                      Akshat Kacodia — <span className="font-semibold text-slate-800">93108 23970</span>
                     </p>
                   </div>
                 </div>
@@ -84,22 +72,10 @@ export default function ContactSection() {
                   </h5>
                   <div className="space-y-2 text-sm text-gray-600">
                     <p>
-                      Garima Singh —{" "}
-                      <a
-                        href="tel:+919560884883"
-                        className="text-[#7B1F34] hover:underline font-semibold"
-                      >
-                        95608 84883
-                      </a>
+                      Garima Singh — <span className="font-semibold text-slate-800">95608 84883</span>
                     </p>
                     <p>
-                      Shubham Gupta —{" "}
-                      <a
-                        href="tel:+919667979306"
-                        className="text-[#7B1F34] hover:underline font-semibold"
-                      >
-                        96679 79306
-                      </a>
+                      Shubham Gupta — <span className="font-semibold text-slate-800">96679 79306</span>
                     </p>
                     <p>Rishabh Jha</p>
                     <p>Spruha Kar</p>

@@ -145,12 +145,9 @@ export default function AccommodationSection() {
                       {/* Contact */}
                       <td className="px-6 py-5">
                         {hotel.contact ? (
-                          <a
-                            href={`tel:${hotel.contact.replace(/\s/g, "")}`}
-                            className="text-[#7B1F34] text-sm font-semibold hover:underline"
-                          >
+                          <span className="text-slate-600 text-sm font-medium">
                             {hotel.contact}
-                          </a>
+                          </span>
                         ) : (
                           <span className="text-gray-300 text-sm">—</span>
                         )}
@@ -192,21 +189,11 @@ export default function AccommodationSection() {
               <div className="flex flex-wrap gap-x-8 gap-y-2">
                 <p className="text-sm text-gray-700 flex items-center gap-1.5">
                   <span className="font-semibold text-slate-800">Aditya Mishra:</span>
-                  <a
-                    href="tel:+918826490096"
-                    className="text-[#7B1F34] font-bold hover:underline"
-                  >
-                    88264 90096
-                  </a>
+                  <span className="text-slate-600 font-medium">88264 90096</span>
                 </p>
                 <p className="text-sm text-gray-700 flex items-center gap-1.5">
                   <span className="font-semibold text-slate-800">Akshat Kacodia:</span>
-                  <a
-                    href="tel:+919310823970"
-                    className="text-[#7B1F34] font-bold hover:underline"
-                  >
-                    93108 23970
-                  </a>
+                  <span className="text-slate-600 font-medium">93108 23970</span>
                 </p>
               </div>
             </div>

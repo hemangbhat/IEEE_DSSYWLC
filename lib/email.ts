@@ -33,10 +33,8 @@ function getEmailConfig() {
 }
 
 function getSiteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(
-    /\/$/,
-    ""
-  );
+  // Use custom domain as default for production emails
+  return (process.env.NEXT_PUBLIC_SITE_URL || "https://dssywlcnsut.in").replace(/\/$/, "");
 }
 
 async function sendEmail({
@@ -104,17 +102,17 @@ export async function sendConfirmationEmail(
     to,
     subject: "Registration Received — DSSYWLC '25",
     textContent: [
-      `Dear ${name},`,
+      `Hi ${name},`,
       "",
-      "Thank you for registering for the Delhi Section Student, Young Professionals, Women in Engineering & Life Member Congress (DSSYWLC '25). The congress is hosted at Netaji Subhas University of Technology (NSUT) and organized by the IEEE NSUT Student Branch.",
+      "Thanks for applying to DSSYWLC '25! We're excited to have you on board.",
       "",
-      "Your registration has been successfully received and is currently under review.",
+      "Your registration is in good shape and currently under review.",
       "",
-      `Track your registration profile here: ${profileUrl}`,
+      `Check out your registration profile here: ${profileUrl}`,
       "",
-      "Should you have any questions, please feel free to contact us.",
+      "If you have any questions, just hit reply – we’re happy to help.",
       "",
-      "Best regards,",
+      "Cheers,",
       "Organizing Committee, DSSYWLC '25",
       "IEEE NSUT Student Branch",
       "Netaji Subhas University of Technology (NSUT)",
@@ -135,12 +133,12 @@ export async function sendConfirmationEmail(
               <!-- Body -->
               <tr>
                 <td style="padding: 32px 24px;">
-                  <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Dear ${safeName},</p>
+                  <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Hi ${safeName},</p>
                   <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
-                    Thank you for registering for the <strong>Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Member Congress (DSSYWLC '25)</strong>. The congress is hosted at <strong>Netaji Subhas University of Technology (NSUT)</strong> and organized by the <strong>IEEE NSUT Student Branch</strong>.
+                    Thanks for applying for the <strong>Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Member Congress (DSSYWLC '25)</strong>! We are super excited to have you join us at <strong>Netaji Subhas University of Technology (NSUT)</strong>.
                   </p>
                   <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
-                    Your registration details have been successfully received and are currently under review by our organizing committee.
+                    Your registration details and payment screenshot have been successfully received and are currently under review by our organizing committee.
                   </p>
                   
                   <!-- Status Box -->
@@ -178,28 +176,28 @@ const STATUS_LABELS: Record<string, { label: string; badge: string; color: strin
     badge: "REGISTRATION APPROVED",
     color: "#16a34a",
     bg: "#f0fdf4",
-    description: "Congratulations! Your registration has been approved. We look forward to seeing you at the congress.",
+    description: "Great news! Your registration has been approved. We're super excited to see you at the congress!",
   },
   rejected: {
     label: "Declined",
     badge: "REGISTRATION DECLINED",
     color: "#dc2626",
     bg: "#fef2f2",
-    description: "We regret to inform you that your registration has been declined.",
+    description: "Thank you for registering. Unfortunately, we aren't able to approve your registration at this time. If you have questions or believe this is a mistake, please reach out.",
   },
   needs_info: {
     label: "Action Required",
     badge: "ACTION REQUIRED",
     color: "#d97706",
     bg: "#fffbeb",
-    description: "Your registration requires immediate action. Please review the reviewer's remarks below and update your registration with the necessary details.",
+    description: "We need a quick update from you to finish processing your registration. Please check the reviewer's remarks below and update your profile details so we can get you approved!",
   },
   under_review: {
     label: "Under Review",
     badge: "REGISTRATION UPDATE",
     color: "#64748b",
     bg: "#f8fafc",
-    description: "Your registration is currently under review by our organizing committee.",
+    description: "Just a quick update: your registration is currently being reviewed by our organizing team. We'll send you another email as soon as it's verified!",
   },
 };
 
@@ -232,17 +230,15 @@ export async function sendStatusUpdateEmail(
     to,
     subject: `Registration Status Update: ${statusInfo.label} — DSSYWLC '25`,
     textContent: [
-      `Dear ${name},`,
+      `Hi ${name},`,
       "",
-      `This is to inform you that your registration status for DSSYWLC '25 has been updated to: ${statusInfo.label}.`,
-      "",
-      "The congress is hosted at Netaji Subhas University of Technology (NSUT) and organized by the IEEE NSUT Student Branch.",
+      `Just a quick update about your registration for DSSYWLC '25. Your status has been updated to: ${statusInfo.label}.`,
       "",
       remarks ? `Reviewer Remarks:\n${remarks}` : "",
       "",
-      `You can view your complete registration details here: ${profileUrl}`,
+      `You can view your complete registration details and track updates here: ${profileUrl}`,
       "",
-      "Best regards,",
+      "Cheers,",
       "Organizing Committee, DSSYWLC '25",
       "IEEE NSUT Student Branch",
       "Netaji Subhas University of Technology (NSUT)",
@@ -265,9 +261,9 @@ export async function sendStatusUpdateEmail(
               <!-- Body -->
               <tr>
                 <td style="padding: 32px 24px;">
-                  <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Dear ${safeName},</p>
+                  <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Hi ${safeName},</p>
                   <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
-                    This is to inform you that your registration status for <strong>DSSYWLC '25</strong> has been updated. The congress is hosted at <strong>Netaji Subhas University of Technology (NSUT)</strong> and organized by the <strong>IEEE NSUT Student Branch</strong>.
+                    Just a quick update about your registration for <strong>DSSYWLC '25</strong>.
                   </p>
                   
                   <!-- Status Box -->

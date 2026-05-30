@@ -80,7 +80,7 @@ export default function ScheduleSection() {
     },
     {
       time: "05:15 – 06:00 PM",
-      title: "Any Event",
+      title: "Quiz Session",
       description: "",
       highlight: true,
     },

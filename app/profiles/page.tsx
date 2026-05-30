@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { registrations } from "@/lib/db/schema";
+import { maskEmail, maskPhone } from "@/components/MaskUtils";
 
 export const metadata: Metadata = {
   robots: {
@@ -131,13 +132,13 @@ export default async function ProfilesPage({
                 <div>
                   <dt className="text-gray-500">Email</dt>
                   <dd className="font-medium text-slate-800">
-                    {registration.email}
+                    {maskEmail(registration.email)}
                   </dd>
                 </div>
                 <div>
                   <dt className="text-gray-500">Phone</dt>
                   <dd className="font-medium text-slate-800">
-                    {registration.phone}
+                    {maskPhone(registration.phone)}
                   </dd>
                 </div>
                 <div>

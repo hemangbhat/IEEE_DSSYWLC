@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // Keep private / PII pages and API routes out of search results.
-      disallow: ["/profiles", "/api/"],
+      disallow: ["/register", "/profiles", "/api/"],
     },
     sitemap: "https://dssywlcnsut.in/sitemap.xml",
   };

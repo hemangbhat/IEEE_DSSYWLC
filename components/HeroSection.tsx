@@ -16,8 +16,8 @@ export default function HeroSection() {
         <div className="relative z-10 section-container animate-on-scroll">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl  lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
-              Delhi Section Student, Young Professionals &amp; Women in
-              Engineering and Life Member Congress
+              IEEE Delhi Section Students, Young Professionals, Women in
+              Engineering and Life Members Congress
             </h1>
 
             <p className="text-lg text-white/90 max-w-2xl mb-10 leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>

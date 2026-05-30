@@ -34,11 +34,11 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-1">DSSYWLC &apos;25</h3>
             <p className="text-white/80 text-sm font-medium mb-1">
-              Delhi Section
+              IEEE Delhi Section
             </p>
             <p className="text-white/60 text-sm leading-relaxed">
-              Delhi Section Student, Young Professionals &amp; Women in
-              Engineering and Life Member Congress.
+              IEEE Delhi Section Students, Young Professionals, Women in
+              Engineering and Life Members Congress.
             </p>
           </div>
           <div>

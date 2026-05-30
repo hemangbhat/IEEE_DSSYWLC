@@ -135,7 +135,7 @@ export async function sendConfirmationEmail(
                 <td style="padding: 32px 24px;">
                   <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Hi ${safeName},</p>
                   <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
-                    Thanks for applying for the <strong>Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Member Congress (DSSYWLC '25)</strong>! We are super excited to have you join us at <strong>Netaji Subhas University of Technology (NSUT)</strong>.
+                    Thanks for applying for the <strong>IEEE Delhi Section Students, Young Professionals, Women in Engineering and Life Members Congress (DSSYWLC '25)</strong>! We are super excited to have you join us at <strong>Netaji Subhas University of Technology (NSUT)</strong>.
                   </p>
                   <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
                     Your registration details and payment screenshot have been successfully received and are currently under review by our organizing committee.

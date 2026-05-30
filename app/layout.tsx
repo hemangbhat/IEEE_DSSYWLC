@@ -16,7 +16,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "DSSYWLC 2025 | IEEE Delhi Section Congress at NSUT",
   description:
-    "DSSYWLC 2025 - IEEE Delhi Section Student, YP & WIE Congress. June 20-21, 2026 at NSUT, New Delhi. Register now!",
+    "DSSYWLC 2025 - IEEE Delhi Section Students, Young Professionals, Women in Engineering and Life Members Congress. June 20-21, 2026 at NSUT, New Delhi. Register now!",
   metadataBase: new URL("https://dssywlcnsut.in"),
   robots: {
     index: true,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "DSSYWLC 2025 | IEEE Delhi Section Congress at NSUT",
     description:
-      "DSSYWLC 2025 - IEEE Delhi Section Student, YP & WIE Congress. June 20-21, 2026 at NSUT, New Delhi. Register now!",
+      "DSSYWLC 2025 - IEEE Delhi Section Students, Young Professionals, Women in Engineering and Life Members Congress. June 20-21, 2026 at NSUT, New Delhi. Register now!",
     url: "https://dssywlcnsut.in",
     siteName: "IEEE NSUT - DSSYWLC",
     images: [

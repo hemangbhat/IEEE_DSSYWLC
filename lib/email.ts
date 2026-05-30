@@ -97,44 +97,110 @@ export async function sendConfirmationEmail(
   const profileUrl = `${getSiteUrl()}/profiles?token=${encodeURIComponent(
     profileToken
   )}`;
+  const logoUrl = `${getSiteUrl()}/logos/dssywlc-logo.png`;
   const safeName = escapeHtml(name);
 
   return sendEmail({
     to,
-    subject: "DSSYWLC '25 — Registration Received",
+    subject: "Registration Received — DSSYWLC '25",
     textContent: [
-      `Hi ${name},`,
+      `Dear ${name},`,
       "",
-      "Your DSSYWLC '25 registration has been received.",
-      "Current status: Under review",
+      "Thank you for registering for the Delhi Section Student, Young Professionals, Women in Engineering & Life Member Congress (DSSYWLC '25). The congress is hosted at Netaji Subhas University of Technology (NSUT) and organized by the IEEE NSUT Student Branch.",
       "",
-      `Track your profile here: ${profileUrl}`,
+      "Your registration has been successfully received and is currently under review.",
       "",
-      "DSSYWLC '25",
+      `Track your registration profile here: ${profileUrl}`,
+      "",
+      "Should you have any questions, please feel free to contact us.",
+      "",
+      "Best regards,",
+      "Organizing Committee, DSSYWLC '25",
+      "IEEE NSUT Student Branch",
+      "Netaji Subhas University of Technology (NSUT)",
     ].join("\n"),
     htmlContent: `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-        <p>Hi ${safeName},</p>
-        <p>Your DSSYWLC '25 registration has been received.</p>
-        <p><strong>Status:</strong> Under review</p>
-        <p>
-          You can view your registration profile here:<br />
-          <a href="${profileUrl}">${profileUrl}</a>
-        </p>
-        <p>Thank you for registering for DSSYWLC '25.</p>
-        <p style="margin-top: 24px; color: #6b7280; font-size: 13px;">
-          Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Member Congress
-        </p>
-      </div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f4f3ef; padding: 40px 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <tr>
+          <td align="center">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 520px; background-color: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left;">
+              <!-- Header -->
+              <tr>
+                <td style="background-color: #7B1F34; padding: 32px 24px; text-align: center;">
+                  <img src="${logoUrl}" alt="DSSYWLC '25 Logo" style="height: 56px; max-width: 100%; display: block; margin: 0 auto 12px auto; object-fit: contain;" />
+                  <div style="font-size: 20px; font-weight: bold; color: #ffffff; letter-spacing: 1px; margin-bottom: 8px; font-family: Helvetica, Arial, sans-serif;">DSSYWLC '25</div>
+                  <div style="font-size: 10px; font-weight: bold; color: #fecdd3; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.25); display: inline-block; padding: 4px 12px; border-radius: 4px; background-color: rgba(255,255,255,0.08);">REGISTRATION RECEIVED</div>
+                </td>
+              </tr>
+              <!-- Body -->
+              <tr>
+                <td style="padding: 32px 24px;">
+                  <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Dear ${safeName},</p>
+                  <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
+                    Thank you for registering for the <strong>Delhi Section Student, Young Professionals, Women in Engineering &amp; Life Member Congress (DSSYWLC '25)</strong>. The congress is hosted at <strong>Netaji Subhas University of Technology (NSUT)</strong> and organized by the <strong>IEEE NSUT Student Branch</strong>.
+                  </p>
+                  <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
+                    Your registration details have been successfully received and are currently under review by our organizing committee.
+                  </p>
+                  
+                  <!-- Status Box -->
+                  <div style="background-color: #f8fafc; border-left: 4px solid #64748b; padding: 16px; margin: 24px 0; border-radius: 4px;">
+                    <p style="font-size: 11px; font-weight: bold; color: #475569; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 6px 0;">REGISTRATION STATUS: UNDER REVIEW</p>
+                    <p style="font-size: 13px; color: #334155; line-height: 1.5; margin: 0;">
+                      We are currently verifying your payment screenshot and registration details. You will be notified automatically via email once the review is complete.
+                    </p>
+                  </div>
+                  
+                  <!-- Action Button -->
+                  <div style="text-align: center; margin: 32px 0 16px 0;">
+                    <a href="${profileUrl}" style="display: inline-block; background-color: #7B1F34; color: #ffffff; text-decoration: none; padding: 12px 32px; font-size: 13px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 4px; box-shadow: 0 2px 4px rgba(123, 31, 52, 0.2);">TRACK MY REGISTRATION &rarr;</a>
+                    <p style="font-size: 12px; color: #64748b; margin-top: 16px; margin-bottom: 0;">This link is personal and unique to you. Do not share it with others.</p>
+                  </div>
+                </td>
+              </tr>
+              <!-- Footer -->
+              <tr>
+                <td style="background-color: #7B1F34; color: #fecdd3; font-size: 11px; text-align: center; padding: 16px 24px; line-height: 1.4;">
+                  DSSYWLC '25 &bull; Automated email &bull; Do not reply
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
     `,
   });
 }
 
-const STATUS_LABELS: Record<string, { label: string; color: string }> = {
-  verified: { label: "Approved ✅", color: "#16a34a" },
-  rejected: { label: "Rejected ❌", color: "#dc2626" },
-  needs_info: { label: "More Information Needed ⚠️", color: "#d97706" },
-  under_review: { label: "Under Review", color: "#6b7280" },
+const STATUS_LABELS: Record<string, { label: string; badge: string; color: string; bg: string; description: string }> = {
+  verified: {
+    label: "Approved",
+    badge: "REGISTRATION APPROVED",
+    color: "#16a34a",
+    bg: "#f0fdf4",
+    description: "Congratulations! Your registration has been approved. We look forward to seeing you at the congress.",
+  },
+  rejected: {
+    label: "Declined",
+    badge: "REGISTRATION DECLINED",
+    color: "#dc2626",
+    bg: "#fef2f2",
+    description: "We regret to inform you that your registration has been declined.",
+  },
+  needs_info: {
+    label: "Action Required",
+    badge: "ACTION REQUIRED",
+    color: "#d97706",
+    bg: "#fffbeb",
+    description: "Your registration requires immediate action. Please review the reviewer's remarks below and update your registration with the necessary details.",
+  },
+  under_review: {
+    label: "Under Review",
+    badge: "REGISTRATION UPDATE",
+    color: "#64748b",
+    bg: "#f8fafc",
+    description: "Your registration is currently under review by our organizing committee.",
+  },
 };
 
 export async function sendStatusUpdateEmail(
@@ -147,46 +213,90 @@ export async function sendStatusUpdateEmail(
   const profileUrl = `${getSiteUrl()}/profiles?token=${encodeURIComponent(
     profileToken
   )}`;
+  const logoUrl = `${getSiteUrl()}/logos/dssywlc-logo.png`;
 
   const statusInfo = STATUS_LABELS[newStatus] || STATUS_LABELS.under_review;
   const safeName = escapeHtml(name);
 
   const remarksBlock = remarks
-    ? `<p style="background: #fef3c7; padding: 12px; border-radius: 6px; border-left: 4px solid #d97706;"><strong>Reviewer Remarks:</strong><br/>${escapeHtml(remarks)}</p>`
+    ? `
+      <!-- Remarks Box -->
+      <div style="background-color: #fffbeb; border-left: 4px solid #d97706; padding: 16px; margin: 24px 0; border-radius: 4px;">
+        <p style="font-size: 11px; font-weight: bold; color: #b45309; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 6px 0;">REVIEWER REMARKS</p>
+        <p style="font-size: 13px; color: #78350f; line-height: 1.5; margin: 0; white-space: pre-wrap;">${escapeHtml(remarks)}</p>
+      </div>
+    `
     : "";
 
   return sendEmail({
     to,
-    subject: `DSSYWLC '25 — Registration ${statusInfo.label}`,
+    subject: `Registration Status Update: ${statusInfo.label} — DSSYWLC '25`,
     textContent: [
-      `Hi ${name},`,
+      `Dear ${name},`,
       "",
-      `Your DSSYWLC '25 registration status has been updated to: ${statusInfo.label}`,
+      `This is to inform you that your registration status for DSSYWLC '25 has been updated to: ${statusInfo.label}.`,
       "",
-      remarks ? `Reviewer remarks: ${remarks}` : "",
+      "The congress is hosted at Netaji Subhas University of Technology (NSUT) and organized by the IEEE NSUT Student Branch.",
       "",
-      `View your profile: ${profileUrl}`,
+      remarks ? `Reviewer Remarks:\n${remarks}` : "",
       "",
-      "DSSYWLC '25",
+      `You can view your complete registration details here: ${profileUrl}`,
+      "",
+      "Best regards,",
+      "Organizing Committee, DSSYWLC '25",
+      "IEEE NSUT Student Branch",
+      "Netaji Subhas University of Technology (NSUT)",
     ]
       .filter(Boolean)
       .join("\n"),
     htmlContent: `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-        <p>Hi ${safeName},</p>
-        <p>Your DSSYWLC '25 registration status has been updated:</p>
-        <p style="font-size: 18px;">
-          <strong style="color: ${statusInfo.color};">${statusInfo.label}</strong>
-        </p>
-        ${remarksBlock}
-        <p>
-          View your registration profile:<br />
-          <a href="${profileUrl}">${profileUrl}</a>
-        </p>
-        <p style="margin-top: 24px; color: #6b7280; font-size: 13px;">
-          Delhi Section Student, Young Professionals, Women in Engineering & Life Member Congress
-        </p>
-      </div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f4f3ef; padding: 40px 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <tr>
+          <td align="center">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 520px; background-color: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left;">
+              <!-- Header -->
+              <tr>
+                <td style="background-color: #7B1F34; padding: 32px 24px; text-align: center;">
+                  <img src="${logoUrl}" alt="DSSYWLC '25 Logo" style="height: 56px; max-width: 100%; display: block; margin: 0 auto 12px auto; object-fit: contain;" />
+                  <div style="font-size: 20px; font-weight: bold; color: #ffffff; letter-spacing: 1px; margin-bottom: 8px; font-family: Helvetica, Arial, sans-serif;">DSSYWLC '25</div>
+                  <div style="font-size: 10px; font-weight: bold; color: #fecdd3; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.25); display: inline-block; padding: 4px 12px; border-radius: 4px; background-color: rgba(255,255,255,0.08);">${statusInfo.badge}</div>
+                </td>
+              </tr>
+              <!-- Body -->
+              <tr>
+                <td style="padding: 32px 24px;">
+                  <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Dear ${safeName},</p>
+                  <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
+                    This is to inform you that your registration status for <strong>DSSYWLC '25</strong> has been updated. The congress is hosted at <strong>Netaji Subhas University of Technology (NSUT)</strong> and organized by the <strong>IEEE NSUT Student Branch</strong>.
+                  </p>
+                  
+                  <!-- Status Box -->
+                  <div style="background-color: ${statusInfo.bg}; border-left: 4px solid ${statusInfo.color}; padding: 16px; margin: 24px 0; border-radius: 4px;">
+                    <p style="font-size: 11px; font-weight: bold; color: ${statusInfo.color}; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 6px 0;">STATUS: ${statusInfo.label.toUpperCase()}</p>
+                    <p style="font-size: 13px; color: #334155; line-height: 1.5; margin: 0;">
+                      ${statusInfo.description}
+                    </p>
+                  </div>
+                  
+                  ${remarksBlock}
+                  
+                  <!-- Action Button -->
+                  <div style="text-align: center; margin: 32px 0 16px 0;">
+                    <a href="${profileUrl}" style="display: inline-block; background-color: #7B1F34; color: #ffffff; text-decoration: none; padding: 12px 32px; font-size: 13px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 4px; box-shadow: 0 2px 4px rgba(123, 31, 52, 0.2);">VIEW MY PROFILE &rarr;</a>
+                    <p style="font-size: 12px; color: #64748b; margin-top: 16px; margin-bottom: 0;">This link is personal and unique to you. Do not share it with others.</p>
+                  </div>
+                </td>
+              </tr>
+              <!-- Footer -->
+              <tr>
+                <td style="background-color: #7B1F34; color: #fecdd3; font-size: 11px; text-align: center; padding: 16px 24px; line-height: 1.4;">
+                  DSSYWLC '25 &bull; Automated email &bull; Do not reply
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
     `,
   });
 }

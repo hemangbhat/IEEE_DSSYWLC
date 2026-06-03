@@ -20,10 +20,54 @@ export default function HeroSection() {
               Engineering and Life Members Congress
             </h1>
 
-            <p className="text-lg text-white/90 max-w-2xl mb-10 leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+            <p className="text-lg text-white/90 max-w-2xl mb-7 leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
               Converging young minds, visionary women engineers, and distinguished
               life members for a future of innovation.
             </p>
+
+            <div className="mb-10 flex flex-col gap-3 text-sm font-bold text-white sm:flex-row sm:flex-wrap sm:items-center sm:gap-5 md:text-base">
+              <div className="flex items-center gap-3">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5 flex-shrink-0 text-[#F2C14E]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <path d="M3 10h18" />
+                  <path d="M5 4h14a2 2 0 0 1 2 2v16H3V6a2 2 0 0 1 2-2Z" />
+                </svg>
+                <span style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+                  20-21 June 2026
+                </span>
+              </div>
+
+              <span className="hidden h-5 w-px bg-white/30 sm:block" />
+
+              <div className="flex items-center gap-3">
+                <svg
+                  aria-hidden="true"
+                  className="h-5 w-5 flex-shrink-0 text-[#F2C14E]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 10c0 4.5-8 12-8 12S4 14.5 4 10a8 8 0 1 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+                  Netaji Subhas University of Technology (NSUT)
+                </span>
+              </div>
+            </div>
             {/* Enhanced CTA buttons with rounded corners and hover animations */}
 
             <div className="flex flex-wrap gap-4">

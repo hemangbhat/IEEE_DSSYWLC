@@ -100,13 +100,11 @@ export async function sendConfirmationEmail(
 
   return sendEmail({
     to,
-    subject: "Registration Received — DSSYWLC '25",
+    subject: "Thanks for applying! Your registration is received",
     textContent: [
-      `Hi ${name},`,
+      `Hello ${name}`,
       "",
-      "Thanks for applying to DSSYWLC '25! We're excited to have you on board.",
-      "",
-      "Your registration is in good shape and currently under review.",
+      "Thanks for applying! We're thrilled to join you at the IEEE Delhi Section Students, Young Professionals, Women in Engineering and Life Members Congress (DSSYWLC '25).",
       "",
       `Check out your registration profile here: ${profileUrl}`,
       "",
@@ -115,7 +113,7 @@ export async function sendConfirmationEmail(
       "Cheers,",
       "Organizing Committee, DSSYWLC '25",
       "IEEE NSUT Student Branch",
-      "Netaji Subhas University of Technology (NSUT)",
+      "Netaji Subhas University of Technology (NSUT)"
     ].join("\n"),
     htmlContent: `
       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f4f3ef; padding: 40px 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">

@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const isDev = process.env.NODE_ENV !== "production";
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
+const posthogOrigin = posthogHost ? new URL(posthogHost).origin : "";
 
 // Content-Security-Policy.
 // - Turnstile needs script + frame from challenges.cloudflare.com
@@ -14,7 +16,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https://challenges.cloudflare.com https://*.amazonaws.com",
+  `connect-src 'self' https://challenges.cloudflare.com https://*.amazonaws.com${posthogOrigin ? ` ${posthogOrigin}` : ""}`,
   "frame-src https://challenges.cloudflare.com https://www.google.com",
   "frame-ancestors 'none'",
   "object-src 'none'",

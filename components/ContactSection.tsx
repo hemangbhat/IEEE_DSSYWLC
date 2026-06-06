@@ -74,9 +74,9 @@ export default function ContactSection() {
                   </h5>
                   <div className="space-y-2 text-sm text-gray-600">
                     <p>
-                      Aditya Mishra (Chairperson)
+                      Sakshi Sahu (Vice-Chairperson)
                       <br />
-                      <span className="font-semibold text-slate-800">88264 90096</span>
+                      <span className="font-semibold text-slate-800">79825 68456</span>
                     </p>
                     <p>
                       Akshat Kacodia (Vice-Chairperson)

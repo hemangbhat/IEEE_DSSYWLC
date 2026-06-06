@@ -108,7 +108,7 @@ export async function sendConfirmationEmail(
       "",
       `Check out your registration profile here: ${profileUrl}`,
       "",
-      "If you have any questions, just hit reply – we’re happy to help.",
+      "If you have any questions, reach us at ieee@nsut.ac.in – we’re happy to help.",
       "",
       "Cheers,",
       "Organizing Committee, DSSYWLC '25",

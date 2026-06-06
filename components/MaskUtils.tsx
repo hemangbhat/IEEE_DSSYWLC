@@ -3,9 +3,15 @@
 export function maskEmail(email: string): string {
   const [localPart, domain] = email.split("@");
   if (!domain) return email;
+  // Too short to reveal both ends without overlapping/duplicating — show only
+  // the first character and mask the rest.
+  if (localPart.length <= 4) {
+    const first = localPart.slice(0, 1);
+    return `${first}${"*".repeat(Math.max(1, localPart.length - 1))}@${domain}`;
+  }
   const visibleStart = localPart.slice(0, 2);
   const visibleEnd = localPart.slice(-2);
-  const maskedMiddle = "*".repeat(Math.max(0, localPart.length - 4));
+  const maskedMiddle = "*".repeat(localPart.length - 4);
   return `${visibleStart}${maskedMiddle}${visibleEnd}@${domain}`;
 }
 

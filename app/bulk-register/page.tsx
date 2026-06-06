@@ -159,6 +159,30 @@ export default function BulkRegisterPage() {
   );
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
+  // Navigate to the correct step when server-side validation errors come back
+  useEffect(() => {
+    if (submitState.errors) {
+      const step1Fields = ["leaderFullName", "leaderEmail", "leaderPhone", "leaderAffiliation"];
+      const step2Fields = [
+        "leaderCategory",
+        "leaderReferralCode",
+        "leaderIsMember",
+        "leaderIeeeId",
+        "leaderStudentBranchCode",
+        "leaderIeeeCardS3Key",
+      ];
+      const step3Fields = ["members"];
+      const keys = Object.keys(submitState.errors);
+      if (keys.some((key) => step1Fields.includes(key))) {
+        setStep(1);
+      } else if (keys.some((key) => step2Fields.includes(key))) {
+        setStep(2);
+      } else if (keys.some((key) => step3Fields.includes(key))) {
+        setStep(3);
+      }
+    }
+  }, [submitState.errors]);
+
   // Leader state
   const [leaderPersonal, setLeaderPersonal] = useState<LeaderPersonalState>({
     fullName: "",
@@ -596,19 +620,6 @@ export default function BulkRegisterPage() {
     clearMemberFieldError(index, field);
   }
 
-  // Price calculation
-  const totalPrice = useMemo(() => {
-    let total = 0;
-    // Leader
-    if (leaderMembership.isMember) total += 700;
-    else if (leaderMembership.category) total += 1000;
-    // Members
-    for (const m of members) {
-      if (m.isMember) total += 700;
-      else if (m.category) total += 1000;
-    }
-    return total;
-  }, [leaderMembership.isMember, leaderMembership.category, members]);
 
   const inputClass =
     "w-full rounded-lg border border-gray-200 px-4 py-2.5 text-sm text-slate-800 outline-none transition-colors focus:border-[#7B1F34] focus:ring-1 focus:ring-[#7B1F34]";

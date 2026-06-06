@@ -32,9 +32,23 @@ export async function verifyTurnstileToken(
 ): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
 
-  // Not configured → skip verification (graceful degrade).
+  // Not configured.
   if (!secret) {
-    console.warn("Turnstile not configured — skipping CAPTCHA verification.");
+    // Fail CLOSED in production: the CAPTCHA is the primary bot protection, so
+    // a missing secret must reject rather than silently let spam through. This
+    // means TURNSTILE_SECRET_KEY MUST be set in production — otherwise every
+    // submission is rejected (a loud, immediate, safe failure).
+    if (process.env.NODE_ENV === "production") {
+      console.error(
+        "TURNSTILE_SECRET_KEY is not set in production — rejecting submission. " +
+          "Set the secret to enable CAPTCHA verification.",
+      );
+      return false;
+    }
+    // Outside production, skip verification so local/dev flows keep working.
+    console.warn(
+      "Turnstile not configured — skipping CAPTCHA verification (non-production).",
+    );
     return true;
   }
 

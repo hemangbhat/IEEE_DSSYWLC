@@ -201,7 +201,10 @@ export default async function ProfilesPage({
           </h2>
           <div className="space-y-3 text-sm">
             <p className="text-slate-700">
-              Payment proof: <span className="font-semibold">Received</span>
+              Payment proof:{" "}
+              <span className="font-semibold">
+                {registration.paymentScreenshotS3Key ? "Received" : "Not received"}
+              </span>
             </p>
             <p className="text-slate-700">
               Current status:{" "}

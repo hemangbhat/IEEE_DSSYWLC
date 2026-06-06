@@ -538,10 +538,14 @@ export default function RegisterPage() {
         {step === 1 && (
           <div className="space-y-6 rounded-xl bg-white p-8 shadow-lg">
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+              <label
+                htmlFor="fullName"
+                className="mb-1.5 block text-sm font-semibold text-slate-700"
+              >
                 Full Name <span className="text-red-500">*</span>
               </label>
               <input
+                id="fullName"
                 type="text"
                 value={step1.fullName}
                 onChange={(event) => {
@@ -553,17 +557,29 @@ export default function RegisterPage() {
                 }}
                 className={inputClass}
                 placeholder="Enter your full name"
+                aria-invalid={errors.fullName ? true : undefined}
+                aria-describedby={errors.fullName ? "fullName-error" : undefined}
               />
               {errors.fullName && (
-                <p className="mt-1 text-xs text-red-500">{errors.fullName}</p>
+                <p
+                  id="fullName-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
+                  {errors.fullName}
+                </p>
               )}
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+              <label
+                htmlFor="email"
+                className="mb-1.5 block text-sm font-semibold text-slate-700"
+              >
                 Email Address <span className="text-red-500">*</span>
               </label>
               <input
+                id="email"
                 type="email"
                 value={step1.email}
                 onChange={(event) => {
@@ -572,17 +588,29 @@ export default function RegisterPage() {
                 }}
                 className={inputClass}
                 placeholder="you@example.com"
+                aria-invalid={errors.email ? true : undefined}
+                aria-describedby={errors.email ? "email-error" : undefined}
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                <p
+                  id="email-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
+                  {errors.email}
+                </p>
               )}
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+              <label
+                htmlFor="phone"
+                className="mb-1.5 block text-sm font-semibold text-slate-700"
+              >
                 Phone Number <span className="text-red-500">*</span>
               </label>
               <input
+                id="phone"
                 type="tel"
                 value={step1.phone}
                 onChange={(event) => {
@@ -591,17 +619,29 @@ export default function RegisterPage() {
                 }}
                 className={inputClass}
                 placeholder="+91 XXXXX XXXXX"
+                aria-invalid={errors.phone ? true : undefined}
+                aria-describedby={errors.phone ? "phone-error" : undefined}
               />
               {errors.phone && (
-                <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+                <p
+                  id="phone-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
+                  {errors.phone}
+                </p>
               )}
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+              <label
+                htmlFor="affiliation"
+                className="mb-1.5 block text-sm font-semibold text-slate-700"
+              >
                 College / Organization <span className="text-red-500">*</span>
               </label>
               <input
+                id="affiliation"
                 type="text"
                 value={step1.affiliation}
                 onChange={(event) => {
@@ -613,9 +653,17 @@ export default function RegisterPage() {
                 }}
                 className={inputClass}
                 placeholder="Your college or organization"
+                aria-invalid={errors.affiliation ? true : undefined}
+                aria-describedby={
+                  errors.affiliation ? "affiliation-error" : undefined
+                }
               />
               {errors.affiliation && (
-                <p className="mt-1 text-xs text-red-500">
+                <p
+                  id="affiliation-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
                   {errors.affiliation}
                 </p>
               )}
@@ -634,10 +682,14 @@ export default function RegisterPage() {
         {step === 2 && (
           <div className="space-y-6 rounded-xl bg-white p-8 shadow-lg">
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+              <label
+                htmlFor="category"
+                className="mb-1.5 block text-sm font-semibold text-slate-700"
+              >
                 Category <span className="text-red-500">*</span>
               </label>
               <select
+                id="category"
                 value={step2.category}
                 onChange={(event) => {
                   setStep2((prev) => ({
@@ -647,6 +699,8 @@ export default function RegisterPage() {
                   clearFieldError("category");
                 }}
                 className={`${inputClass} bg-white`}
+                aria-invalid={errors.category ? true : undefined}
+                aria-describedby={errors.category ? "category-error" : undefined}
               >
                 <option value="" disabled>
                   Select your category
@@ -658,15 +712,25 @@ export default function RegisterPage() {
                 ))}
               </select>
               {errors.category && (
-                <p className="mt-1 text-xs text-red-500">{errors.category}</p>
+                <p
+                  id="category-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
+                  {errors.category}
+                </p>
               )}
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+              <label
+                htmlFor="referralCode"
+                className="mb-1.5 block text-sm font-semibold text-slate-700"
+              >
                 Referral Code
               </label>
               <input
+                id="referralCode"
                 type="text"
                 value={step2.referralCode}
                 onChange={(event) => {
@@ -678,9 +742,17 @@ export default function RegisterPage() {
                 }}
                 className={inputClass}
                 placeholder="Enter referral code (if any)"
+                aria-invalid={errors.referralCode ? true : undefined}
+                aria-describedby={
+                  errors.referralCode ? "referralCode-error" : undefined
+                }
               />
               {errors.referralCode && (
-                <p className="mt-1 text-xs text-red-500">
+                <p
+                  id="referralCode-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
                   {errors.referralCode}
                 </p>
               )}
@@ -717,10 +789,14 @@ export default function RegisterPage() {
             {step2.isMember && (
               <div className="space-y-6 border-l-2 border-[#7B1F34]/20 pl-4">
                 <div>
-                  <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+                  <label
+                    htmlFor="ieeeId"
+                    className="mb-1.5 block text-sm font-semibold text-slate-700"
+                  >
                     IEEE Membership ID <span className="text-red-500">*</span>
                   </label>
                   <input
+                    id="ieeeId"
                     type="text"
                     value={step2.ieeeId}
                     onChange={(event) => {
@@ -732,17 +808,29 @@ export default function RegisterPage() {
                     }}
                     className={inputClass}
                     placeholder="e.g. 12345678"
+                    aria-invalid={errors.ieeeId ? true : undefined}
+                    aria-describedby={errors.ieeeId ? "ieeeId-error" : undefined}
                   />
                   {errors.ieeeId && (
-                    <p className="mt-1 text-xs text-red-500">{errors.ieeeId}</p>
+                    <p
+                      id="ieeeId-error"
+                      role="alert"
+                      className="mt-1 text-xs text-red-500"
+                    >
+                      {errors.ieeeId}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+                  <label
+                    htmlFor="studentBranchCode"
+                    className="mb-1.5 block text-sm font-semibold text-slate-700"
+                  >
                     Student Branch Code
                   </label>
                   <input
+                    id="studentBranchCode"
                     type="text"
                     value={step2.studentBranchCode}
                     onChange={(event) => {
@@ -754,16 +842,29 @@ export default function RegisterPage() {
                     }}
                     className={inputClass}
                     placeholder="Enter branch code (optional)"
+                    aria-invalid={errors.studentBranchCode ? true : undefined}
+                    aria-describedby={
+                      errors.studentBranchCode
+                        ? "studentBranchCode-error"
+                        : undefined
+                    }
                   />
                   {errors.studentBranchCode && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p
+                      id="studentBranchCode-error"
+                      role="alert"
+                      className="mt-1 text-xs text-red-500"
+                    >
                       {errors.studentBranchCode}
                     </p>
                   )}
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+                  <label
+                    htmlFor="ieeeCardFile"
+                    className="mb-1.5 block text-sm font-semibold text-slate-700"
+                  >
                     IEEE Membership ID Card{" "}
                     <span className="text-red-500">*</span>
                   </label>
@@ -783,6 +884,7 @@ export default function RegisterPage() {
                       </p>
                     )}
                     <input
+                      id="ieeeCardFile"
                       type="file"
                       accept="image/jpeg,image/png,image/webp,application/pdf"
                       className="hidden"
@@ -791,10 +893,18 @@ export default function RegisterPage() {
                           event.target.files?.[0] ?? null,
                         );
                       }}
+                      aria-invalid={errors.ieeeCardS3Key ? true : undefined}
+                      aria-describedby={
+                        errors.ieeeCardS3Key ? "ieeeCardS3Key-error" : undefined
+                      }
                     />
                   </label>
                   {errors.ieeeCardS3Key && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p
+                      id="ieeeCardS3Key-error"
+                      role="alert"
+                      className="mt-1 text-xs text-red-500"
+                    >
                       {errors.ieeeCardS3Key}
                     </p>
                   )}
@@ -848,16 +958,28 @@ export default function RegisterPage() {
                   </p>
                 )}
                 <input
+                  id="paymentFile"
                   type="file"
                   accept="image/jpeg,image/png,image/webp"
                   className="hidden"
+                  aria-label="Upload payment screenshot"
                   onChange={(event) => {
                     void handlePaymentUpload(event.target.files?.[0] ?? null);
                   }}
+                  aria-invalid={errors.paymentScreenshotS3Key ? true : undefined}
+                  aria-describedby={
+                    errors.paymentScreenshotS3Key
+                      ? "paymentScreenshotS3Key-error"
+                      : undefined
+                  }
                 />
               </label>
               {errors.paymentScreenshotS3Key && (
-                <p className="mt-1 text-xs text-red-500">
+                <p
+                  id="paymentScreenshotS3Key-error"
+                  role="alert"
+                  className="mt-1 text-xs text-red-500"
+                >
                   {errors.paymentScreenshotS3Key}
                 </p>
               )}
@@ -950,7 +1072,10 @@ export default function RegisterPage() {
               <div>
                 <div ref={turnstileRef} className="flex justify-center" />
                 {errors.captcha && (
-                  <p className="mt-2 text-center text-xs text-red-500">
+                  <p
+                    role="alert"
+                    className="mt-2 text-center text-xs text-red-500"
+                  >
                     {errors.captcha}
                   </p>
                 )}

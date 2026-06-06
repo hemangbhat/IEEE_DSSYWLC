@@ -83,6 +83,15 @@ export default function HeroSection() {
               >
                 Register Now
               </Link>
+              <Link
+                href="/bulk-register"
+                className="px-8 py-3 border-2 border-white/60 text-white/90 rounded-xl font-bold text-sm hover:bg-white/10 hover:scale-105 duration-300 transition-all shadow-md inline-flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-base">
+                  group
+                </span>
+                Bulk Register
+              </Link>
             </div>
           </div>
         </div>

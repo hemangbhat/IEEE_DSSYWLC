@@ -18,7 +18,11 @@ type RateLimitEntry = {
 };
 
 const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 10;
+// Headroom for bulk/team registration (a full team can need ~12 uploads) and
+// for shared campus IPs where many registrants upload from the same network
+// within the window. Bot abuse is primarily handled by the Turnstile CAPTCHA
+// on submit plus server-side file size/type verification.
+const RATE_LIMIT_MAX_REQUESTS = 50;
 const SESSION_COOKIE_NAME = "upload_session_id";
 
 const ipRateLimits = new Map<string, RateLimitEntry>();

@@ -72,13 +72,20 @@ export default function RegistrationSection() {
           </div>
         </div>
 
-        {/* Single unified Register Now CTA */}
-        <div className="text-center mt-12 animate-on-scroll">
+        {/* Registration CTA buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mt-12 animate-on-scroll">
           <Link
             href="/register"
             className="inline-block px-12 py-4 bg-[#7B1F34] text-white rounded-lg font-bold text-base hover:brightness-110 transition-all shadow-md"
           >
             Register Now
+          </Link>
+          <Link
+            href="/bulk-register"
+            className="inline-flex items-center gap-2 px-10 py-4 border-2 border-[#7B1F34] text-[#7B1F34] rounded-lg font-bold text-base hover:bg-[#7B1F34] hover:text-white transition-all shadow-md"
+          >
+            <span className="material-symbols-outlined text-lg">group</span>
+            Bulk Register
           </Link>
         </div>
       </div>

@@ -149,11 +149,11 @@ export const bulkRegistrationSchema = z
     leaderIeeeId: z.string().max(20).optional().or(z.literal("")),
     leaderStudentBranchCode: z.string().max(50).optional().or(z.literal("")),
     leaderIeeeCardS3Key: z.string().optional().or(z.literal("")),
-    // Team members (2–10)
+    // Team members (10–25)
     members: z
       .array(bulkMemberSchema)
-      .min(2, "At least 2 team members are required")
-      .max(10, "Maximum 10 team members allowed"),
+      .min(10, "At least 10 team members are required")
+      .max(25, "Maximum 25 team members allowed"),
     // Single payment for the whole team
     paymentScreenshotS3Key: z.string().min(1, "Payment screenshot is required"),
   })

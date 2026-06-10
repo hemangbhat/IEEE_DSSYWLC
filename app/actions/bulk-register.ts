@@ -21,7 +21,7 @@ import {
   MAX_UPLOAD_SIZE_BYTES,
 } from "@/lib/s3";
 
-// Bulk submits are heavier than single ones (up to 11 rows + emails + Sheets
+// Bulk submits are heavier than single ones (up to 26 rows + emails + Sheets
 // calls), so the throttle is tighter.
 const BULK_RATE_LIMIT_MAX = 3;
 const BULK_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -216,17 +216,22 @@ export async function submitBulkRegistration(
       }
     }
 
-    for (let i = 0; i < data.members.length; i++) {
-      const member = data.members[i];
-      if (member.isMember && member.ieeeCardS3Key) {
-        const err = await verifyUploadedFile(
-          member.ieeeCardS3Key.trim(),
-          "document",
-          `Team member ${i + 1}'s IEEE membership card`,
-        );
-        if (err) {
-          return { success: false, message: err };
+    // Verify all member IEEE cards in parallel.
+    const memberCardErrors = await Promise.all(
+      data.members.map((member, i) => {
+        if (member.isMember && member.ieeeCardS3Key) {
+          return verifyUploadedFile(
+            member.ieeeCardS3Key.trim(),
+            "document",
+            `Team member ${i + 1}'s IEEE membership card`,
+          );
         }
+        return Promise.resolve(null);
+      }),
+    );
+    for (const err of memberCardErrors) {
+      if (err) {
+        return { success: false, message: err };
       }
     }
 
@@ -296,14 +301,16 @@ export async function submitBulkRegistration(
       ],
     );
 
-    // ── Side effects (best-effort; never block the success response) ──
+    // ── Side effects (best-effort; run in parallel to handle up to 26 rows) ──
     const allRows = [
       { values: leaderValues, token: leaderToken },
       ...memberRecords.map((r) => ({ values: r.values, token: r.token })),
     ];
-    for (const row of allRows) {
-      try {
-        await pushRegistrationToSheet({
+
+    // Push all rows to Google Sheets concurrently.
+    const sheetResults = await Promise.allSettled(
+      allRows.map((row) =>
+        pushRegistrationToSheet({
           profileToken: row.token,
           fullName: row.values.fullName,
           email: row.values.email,
@@ -317,35 +324,40 @@ export async function submitBulkRegistration(
           ieeeCardS3Key: row.values.ieeeCardS3Key,
           paymentScreenshotS3Key: row.values.paymentScreenshotS3Key,
           registrationStatus: row.values.registrationStatus,
-        });
-      } catch (err) {
-        console.error(`Sheet sync failed for ${row.values.email}:`, err);
+        }),
+      ),
+    );
+    sheetResults.forEach((result, i) => {
+      if (result.status === "rejected") {
+        console.error(`Sheet sync failed for ${allRows[i]!.values.email}:`, result.reason);
       }
-    }
+    });
 
     const totalTeamSize = 1 + memberRecords.length;
-    try {
-      await sendBulkLeaderConfirmationEmail(
+
+    // Send all emails concurrently (leader + each member).
+    const emailResults = await Promise.allSettled([
+      sendBulkLeaderConfirmationEmail(
         leaderEmail,
         leaderValues.fullName,
         leaderToken,
         totalTeamSize,
-      );
-    } catch (err) {
-      console.error("Leader email failed:", err);
-    }
-    for (const r of memberRecords) {
-      try {
-        await sendBulkMemberConfirmationEmail(
+      ),
+      ...memberRecords.map((r) =>
+        sendBulkMemberConfirmationEmail(
           r.email,
           r.name,
           r.token,
           leaderValues.fullName,
-        );
-      } catch (err) {
-        console.error(`Member email failed for ${r.email}:`, err);
+        ),
+      ),
+    ]);
+    emailResults.forEach((result, i) => {
+      if (result.status === "rejected") {
+        const target = i === 0 ? "leader" : `member ${i}`;
+        console.error(`Email failed for ${target}:`, result.reason);
       }
-    }
+    });
 
     return {
       success: true,

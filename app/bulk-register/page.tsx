@@ -560,13 +560,13 @@ export default function BulkRegisterPage() {
     const newMemberErrors: Record<number, Record<string, string>> = {};
     let hasErrors = false;
 
-    if (members.length < 2) {
-      setFieldErrors({ members: "At least 2 team members are required" });
+    if (members.length < 10) {
+      setFieldErrors({ members: "At least 10 team members are required" });
       return;
     }
 
-    if (members.length > 10) {
-      setFieldErrors({ members: "Maximum 10 team members allowed" });
+    if (members.length > 25) {
+      setFieldErrors({ members: "Maximum 25 team members allowed" });
       return;
     }
 
@@ -640,13 +640,13 @@ export default function BulkRegisterPage() {
 
   // ── Helpers ──
   function addMember() {
-    if (members.length >= 10) return;
+    if (members.length >= 25) return;
     setMembers((prev) => [...prev, { ...EMPTY_MEMBER }]);
     setExpandedMember(members.length);
   }
 
   function removeMember(index: number) {
-    if (members.length <= 2) return;
+    if (members.length <= 10) return;
     setMembers((prev) => prev.filter((_, i) => i !== index));
     setMemberFieldErrors((prev) => {
       const next: Record<number, Record<string, string>> = {};
@@ -1101,10 +1101,10 @@ export default function BulkRegisterPage() {
                     group
                   </span>
                   <h2 className="text-lg font-bold text-slate-800">
-                    Team Members ({members.length}/10)
+                    Team Members ({members.length}/25)
                   </h2>
                 </div>
-                {members.length < 10 && (
+                {members.length < 25 && (
                   <button
                     type="button"
                     onClick={addMember}
@@ -1174,7 +1174,7 @@ export default function BulkRegisterPage() {
                           )}
                         </div>
                         <div className="flex items-center gap-2">
-                          {members.length > 2 && (
+                          {members.length > 10 && (
                             <span
                               onClick={(e) => {
                                 e.stopPropagation();

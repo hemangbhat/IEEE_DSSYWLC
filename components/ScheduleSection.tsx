@@ -8,6 +8,7 @@ type ScheduleItem = {
   description: string;
   highlight: boolean;
   speakers?: string[];
+  parallel?: { title: string; description?: string }[];
 };
 
 export default function ScheduleSection() {
@@ -24,14 +25,6 @@ export default function ScheduleSection() {
       time: "10:00 – 11:30 AM",
       title: "Inauguration Ceremony",
       description: "Formal welcome & inaugural addresses",
-      speakers: [
-        "Prof. Prerna Gaur, Chair — IEEE India Council",
-        "Dr. Preeti Bajaj, Chair-Elect — IEEE India Council",
-        "Prof. M.N. Hoda, Chairperson — IEEE Delhi Section",
-        "Mr. Deepak Mathur, Past VP — IEEE Member & Geographic Activities",
-        "Dr. S.S. Jamuar, Delhi Section LMAG Secretary",
-        "Ms. Sneha Kabra, Secretary — IEEE Delhi Section",
-      ],
       highlight: true,
     },
     {
@@ -54,7 +47,7 @@ export default function ScheduleSection() {
     },
     {
       time: "01:15 – 02:00 PM",
-      title: "IEEE: Beyond Membership",
+      title: "IEEE: Beyond Membership & Funding and Scholarship Opportunities",
       description: "Guide to global IEEE resources",
       highlight: false,
     },
@@ -72,21 +65,21 @@ export default function ScheduleSection() {
       highlight: true,
     },
     {
-      time: "04:00 – 05:15 PM",
-      title: "Cryptic Hunt",
-      description:
-        "The event challenges participants to solve a chain of logic, tech, and cryptography-based puzzles that simulate the technical process of penetration testing and \"breaking through\" seven",
-      highlight: false,
-    },
-    {
-      time: "05:15 – 06:00 PM",
-      title: "Quiz Session",
+      time: "04:00 – 06:00 PM",
+      title: "Awards",
       description: "",
       highlight: true,
     },
     {
       time: "06:00 – 07:00 PM",
-      title: "Jamming Session",
+      title: "TriFecta",
+      description:
+        "Trifecta is a three-round team event that combines music, communication, and puzzle-solving in a fun and engaging format.",
+      highlight: false,
+    },
+    {
+      time: "07:00 – 08:30 PM",
+      title: "Dinner",
       description: "",
       highlight: false,
     },
@@ -94,74 +87,65 @@ export default function ScheduleSection() {
 
   const day2: ScheduleItem[] = [
     {
-      time: "09:30 – 10:00 AM",
-      title: "Breakfast (Networking - 4)",
-      description: "",
-      highlight: false,
-    },
-    {
-      time: "10:00 – 10:45 AM",
+      time: "09:30 – 10:15 AM",
       title: "IEEE VTools Reporting",
       description:
         "Learn how to effectively use IEEE vTools to report events, manage records, and maintain proper documentation. Understand best practices to ensure your activities are recognised and aligned with IEEE guidelines.",
       highlight: false,
     },
     {
-      time: "10:45 – 11:30 AM",
-      title: "IEEE Funding and Scholarship Opportunities",
-      description:
-        "Explore various IEEE funding avenues available for student branches and chapters to support events and initiatives. Get insights on crafting strong proposals and increasing your chances of securing financial support.",
-      highlight: false,
-    },
-    {
-      time: "11:30 AM – 12:00 PM",
-      title: "High Tea (Networking - 5)",
-      description: "",
-      highlight: false,
-    },
-    {
-      time: "12:00 – 02:00 PM",
+      time: "10:15 AM – 12:00 PM",
       title: "Student Branch Chairs Meet and Presentation",
       description: "",
       highlight: true,
     },
     {
-      time: "02:00 – 03:00 PM",
-      title: "Lunch (Networking - 6)",
+      time: "12:00 – 12:30 PM",
+      title: "High Tea (Networking - 4)",
       description: "",
       highlight: false,
     },
     {
-      time: "03:00 – 03:45 PM",
+      time: "12:30 – 02:00 PM",
       title: "Keynote Speaker Session",
       description: "",
       highlight: true,
     },
     {
-      time: "03:45 – 04:15 PM",
-      title: "Tea Session (Networking - 7)",
+      time: "02:00 – 03:00 PM",
+      title: "Lunch (Networking - 5)",
+      description: "",
+      highlight: false,
+    },
+    {
+      time: "03:00 – 04:30 PM",
+      title: "Competitions",
+      description: "",
+      highlight: true,
+      parallel: [
+        {
+          title: "IEEE DataPort ML Challenge",
+          description: "Machine Learning competition",
+        },
+        {
+          title: "DsaVerse 2.0",
+          description: "Data Structures & Algorithms competition",
+        },
+      ],
+    },
+    {
+      time: "04:30 – 05:00 PM",
+      title: "Tea Session (Networking - 6)",
       description:
         "A light and refreshing break to recharge and unwind amidst the day's activities. Enjoy a selection of snacks while connecting and relaxing with fellow participants.",
       highlight: false,
     },
     {
-      time: "04:15 – 06:30 PM",
-      title: "Awards",
-      description: "",
-      highlight: true,
-    },
-    {
-      time: "06:30 – 07:00 PM",
-      title: "Cultural Night",
+      time: "05:00 – 06:00 PM",
+      title: "Jamming / Cultural Night",
       description:
         "An electrifying evening filled with music, dance, and vibrant performances celebrating diverse talents and cultures. Experience unforgettable moments as the stage comes alive with energy, creativity, and pure entertainment.",
       highlight: true,
-    },
-    {
-      time: "07:00 – 08:30 PM",
-      title: "Dinner (Networking - 8)",
-      description: "",
-      highlight: false,
     },
   ];
 
@@ -223,11 +207,38 @@ export default function ScheduleSection() {
               </div>
               {/* Content */}
               <div className="flex-grow pb-2">
-                <h3 className="text-slate-800 font-bold text-base mb-1">
-                  {item.title}
-                </h3>
-                {item.description && (
-                  <p className="text-gray-500 text-sm">{item.description}</p>
+                {item.parallel?.length ? (
+                  <>
+                    <h3 className="text-slate-800 font-bold text-base mb-3">
+                      {item.title}
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {item.parallel.map((track, k) => (
+                        <div
+                          key={k}
+                          className="rounded-lg border border-gray-200 bg-gray-50 p-4"
+                        >
+                          <h4 className="text-slate-800 font-bold text-sm mb-1">
+                            {track.title}
+                          </h4>
+                          {track.description && (
+                            <p className="text-gray-500 text-xs">
+                              {track.description}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-slate-800 font-bold text-base mb-1">
+                      {item.title}
+                    </h3>
+                    {item.description && (
+                      <p className="text-gray-500 text-sm">{item.description}</p>
+                    )}
+                  </>
                 )}
                 {item.speakers?.length ? (
                   <ul className="mt-3 space-y-1">

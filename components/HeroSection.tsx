@@ -110,7 +110,7 @@ export default function HeroSection() {
             <div className="flex items-center justify-center px-6 md:px-10 py-2 border-r border-white/10 last:border-r-0">
               <img
                 src="/logos/dssywlc-logo.png"
-                alt="DSSYWLC '25 — IEEE Delhi Section SAC"
+                alt="DSSYWLC '25, IEEE Delhi Section SAC"
                 className="h-16 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity"
               />
             </div>

@@ -116,7 +116,7 @@ export default function ContactSection() {
                     Dwarka Mor Metro Station (Blue Line)
                   </p>
                   <p className="text-gray-400 text-xs">
-                    ~1 km — 5–7 min by auto / 15 min walk
+                    ~1 km, 5–7 min by auto / 15 min walk
                   </p>
                 </div>
               </div>

@@ -8,22 +8,22 @@ export default function GuestsSection() {
     // },
     {
       name: "Prof. Prerna Gaur",
-      role: "Chair — IEEE India Council",
+      role: "Chair, IEEE India Council",
       img: "https://res.cloudinary.com/dlia5xgwx/image/upload/v1770186781/drprernagaur_lp5okn.jpg",
     },
     {
       name: "Dr. Preeti Bajaj",
-      role: "Chair-Elect — IEEE India Council",
+      role: "Chair-Elect, IEEE India Council",
       img: "/speakers/preeti-bajaj.png",
     },
     {
       name: "Prof. M.N. Hoda",
-      role: "Chairperson — IEEE Delhi Section",
+      role: "Chairperson, IEEE Delhi Section",
       img: "https://res.cloudinary.com/dlia5xgwx/image/upload/v1770186780/mnhoda_thmusc.jpg",
     },
     {
       name: "Mr. Deepak Mathur",
-      role: "Past VP — IEEE Member & Geographic Activities",
+      role: "Past VP, IEEE Member & Geographic Activities",
       img: "/speakers/deepak-mathur.png",
     },
     {
@@ -33,7 +33,7 @@ export default function GuestsSection() {
     },
     {
       name: "Ms. Sneha Kabra",
-      role: "Secretary — IEEE Delhi Section",
+      role: "Secretary, IEEE Delhi Section",
       img: "/speakers/sneha-kabra.jpeg",
     },
   ];

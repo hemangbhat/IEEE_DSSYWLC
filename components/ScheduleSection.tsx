@@ -59,7 +59,7 @@ export default function ScheduleSection() {
     },
     {
       time: "03:00 – 04:00 PM",
-      title: "Women Who Led the Way — Panel Discussion",
+      title: "Women Who Led the Way (Panel Discussion)",
       description:
         "WIE members talk about navigating male-dominated spaces in tech across different eras",
       highlight: true,
@@ -170,7 +170,7 @@ export default function ScheduleSection() {
                   : "bg-white text-slate-600 hover:bg-gray-50"
               }`}
             >
-              Day 1 — June 20
+              Day 1 · June 20
             </button>
             <button
               onClick={() => setActiveDay(2)}
@@ -180,7 +180,7 @@ export default function ScheduleSection() {
                   : "bg-white text-slate-600 hover:bg-gray-50"
               }`}
             >
-              Day 2 — June 21
+              Day 2 · June 21
             </button>
           </div>
         </div>

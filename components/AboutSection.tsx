@@ -22,9 +22,9 @@ export default function AboutSection() {
             technological advancement.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            DSSYWLC brings these communities together under one roof — through
+            DSSYWLC brings these communities together under one roof through
             technical sessions, panel discussions, leadership talks, and
-            cultural events — to celebrate engineering excellence and build
+            cultural events. It celebrates engineering excellence and builds
             lasting connections across generations. Join us to learn, network,
             and be part of a vibrant IEEE community.
           </p>

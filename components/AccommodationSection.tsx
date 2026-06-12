@@ -167,13 +167,13 @@ export default function AccommodationSection() {
               </span>
               <div className="space-y-2 text-sm text-slate-700">
                 <p className="leading-relaxed">
-                  <strong className="text-slate-800">In-Campus Hostel Update:</strong>{" "}
-                  For the congress on 20–21 June 2026, on-campus hostel
-                  accommodation availability is to be confirmed by 10th June 2026.
+                  <strong className="text-slate-800">Campus Hostel Update:</strong>{" "}
+                  For the congress on 20–21 June 2026, hostel accommodation on
+                  campus is to be confirmed by 10th June 2026.
                 </p>
                 <p className="leading-relaxed">
                   <strong className="text-slate-800">Note:</strong> In the event of an
-                  extreme emergency, you may contact us for last-minute assistance.
+                  extreme emergency, you may contact us for urgent assistance.
                 </p>
               </div>
             </div>

@@ -42,12 +42,9 @@ export default function ScheduleSection() {
     },
     {
       time: "12:30 – 01:15 PM",
-      title:
-        "Beyond the Degree: Building Impact Through Leadership, Innovation and Community",
-      description:
-        "How students and young professionals can create meaningful impact through technical excellence, leadership roles, entrepreneurship, IEEE volunteering, research, and industry engagement.",
-      highlight: true,
-      tag: "WIE: Panel Discussion",
+      title: "Life Members Interacting with Young Professionals",
+      description: "Senior IEEE Members engage with young professionals",
+      highlight: false,
     },
     {
       time: "01:15 – 02:00 PM",
@@ -63,9 +60,12 @@ export default function ScheduleSection() {
     },
     {
       time: "03:00 – 04:00 PM",
-      title: "Life Members Interacting with Young Professionals",
-      description: "Senior IEEE Members engage with young professionals",
+      title:
+        "Beyond the Degree: Building Impact Through Leadership, Innovation and Community",
+      description:
+        "How students and young professionals can create meaningful impact through technical excellence, leadership roles, entrepreneurship, IEEE volunteering, research, and industry engagement.",
       highlight: true,
+      tag: "WIE: Panel Discussion",
     },
     {
       time: "04:00 – 06:00 PM",

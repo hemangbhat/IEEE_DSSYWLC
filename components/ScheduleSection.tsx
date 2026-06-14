@@ -9,6 +9,7 @@ type ScheduleItem = {
   highlight: boolean;
   speakers?: string[];
   parallel?: { title: string; description?: string }[];
+  tag?: string;
 };
 
 export default function ScheduleSection() {
@@ -41,9 +42,12 @@ export default function ScheduleSection() {
     },
     {
       time: "12:30 – 01:15 PM",
-      title: "Life Members Interacting with Young Professionals",
-      description: "Senior IEEE Members engage with young professionals",
-      highlight: false,
+      title:
+        "Beyond the Degree: Building Impact Through Leadership, Innovation and Community",
+      description:
+        "How students and young professionals can create meaningful impact through technical excellence, leadership roles, entrepreneurship, IEEE volunteering, research, and industry engagement.",
+      highlight: true,
+      tag: "WIE: Panel Discussion",
     },
     {
       time: "01:15 – 02:00 PM",
@@ -59,9 +63,8 @@ export default function ScheduleSection() {
     },
     {
       time: "03:00 – 04:00 PM",
-      title: "Women Who Led the Way (Panel Discussion)",
-      description:
-        "WIE members talk about navigating male-dominated spaces in tech across different eras",
+      title: "Life Members Interacting with Young Professionals",
+      description: "Senior IEEE Members engage with young professionals",
       highlight: true,
     },
     {
@@ -232,6 +235,11 @@ export default function ScheduleSection() {
                   </>
                 ) : (
                   <>
+                    {item.tag && (
+                      <span className="inline-block mb-2 rounded bg-[#7B1F34] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
+                        {item.tag}
+                      </span>
+                    )}
                     <h3 className="text-slate-800 font-bold text-base mb-1">
                       {item.title}
                     </h3>

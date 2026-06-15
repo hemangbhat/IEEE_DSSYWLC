@@ -41,16 +41,24 @@ export default function ScheduleSection() {
       highlight: true,
     },
     {
-      time: "12:30 – 01:15 PM",
-      title: "Life Members Interacting with Young Professionals",
+      time: "12:30 – 01:00 PM",
+      title: "Café Samvaad 3.0",
       description: "Senior IEEE Members engage with young professionals",
       highlight: false,
+      tag: "Life Members Interacting with Young Professionals",
     },
     {
-      time: "01:15 – 02:00 PM",
-      title: "IEEE: Beyond Membership & Funding and Scholarship Opportunities",
-      description: "Guide to global IEEE resources",
+      time: "01:00 – 01:30 PM",
+      title: "IEEE Opportunities Unlocked",
+      description: "Funding, Scholarships & More",
       highlight: false,
+      tag: "Young Professionals Session",
+    },
+    {
+      time: "01:30 – 02:00 PM",
+      title: "Keynote Speaker Session",
+      description: "",
+      highlight: true,
     },
     {
       time: "02:00 – 03:00 PM",
@@ -241,7 +249,11 @@ export default function ScheduleSection() {
                       </span>
                     )}
                     <h3 className="text-slate-800 font-bold text-base mb-1">
-                      {item.title}
+                      {item.title.split("\n").map((line, idx) => (
+                        <span key={idx} className={idx > 0 ? "block text-sm font-medium text-slate-600" : ""}>
+                          {line}
+                        </span>
+                      ))}
                     </h3>
                     {item.description && (
                       <p className="text-gray-500 text-sm">{item.description}</p>

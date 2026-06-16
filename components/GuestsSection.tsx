@@ -58,7 +58,7 @@ export default function GuestsSection() {
     {
       name: "Dr. H.L. Bajaj",
       role: "Chair, IEEE LMAG Delhi Section\nEx Chairman, CEA",
-      img: "/speakers/H L Bajaj.png",
+      img: "/speakers/h l bajaj pic.png",
     },
     {
       name: "Dr. Rajendra K. Asthana",

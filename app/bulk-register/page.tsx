@@ -1535,7 +1535,11 @@ export default function BulkRegisterPage() {
 
             {TURNSTILE_SITE_KEY && (
               <div>
-                <div ref={turnstileRef} className="flex justify-center" />
+                <div ref={turnstileRef} className="flex justify-center min-h-[65px] items-center">
+                  {!turnstileToken && turnstileReady && (
+                    <p className="text-xs text-gray-400 animate-pulse">Loading security check...</p>
+                  )}
+                </div>
                 {errors.captcha && (
                   <p
                     role="alert"
@@ -1545,6 +1549,12 @@ export default function BulkRegisterPage() {
                   </p>
                 )}
               </div>
+            )}
+
+            {TURNSTILE_SITE_KEY && !turnstileToken && (
+              <p className="text-center text-xs text-amber-600">
+                Please complete the security check above to enable registration.
+              </p>
             )}
 
             <div className="flex gap-4">

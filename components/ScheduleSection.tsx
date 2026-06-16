@@ -8,7 +8,7 @@ type ScheduleItem = {
   description: string;
   highlight: boolean;
   speakers?: string[];
-  parallel?: { title: string; description?: string }[];
+  parallel?: { title: string; description?: string; tag?: string }[];
   tag?: string;
 };
 
@@ -140,6 +140,7 @@ export default function ScheduleSection() {
         {
           title: "IEEE DataPort ML Challenge",
           description: "Machine Learning competition",
+          tag: "🏆 $300+ Cash Prize",
         },
         {
           title: "DsaVerse 2.0",
@@ -233,6 +234,11 @@ export default function ScheduleSection() {
                           <h4 className="text-slate-800 font-bold text-sm mb-1">
                             {track.title}
                           </h4>
+                          {track.tag && (
+                            <span className="inline-block mb-1.5 rounded bg-[#7B1F34] px-2 py-0.5 text-[10px] font-bold text-white">
+                              {track.tag}
+                            </span>
+                          )}
                           {track.description && (
                             <p className="text-gray-500 text-xs">
                               {track.description}

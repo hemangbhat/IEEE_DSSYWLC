@@ -49,7 +49,7 @@ export default function ScheduleSection() {
     },
     {
       time: "12:30 – 01:00 PM",
-      title: "Café Samvaad 3.0",
+      title: "Café Samvad 3.0",
       description: "Senior IEEE Members engage with young professionals",
       highlight: false,
       tag: "Life Members Interacting with Young Professionals",

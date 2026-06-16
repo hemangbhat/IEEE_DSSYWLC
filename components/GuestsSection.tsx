@@ -37,8 +37,8 @@ export default function GuestsSection() {
       img: "/speakers/Dr. Ashwini-K Aggarwal.png",
     },
     {
-      name: "Prof. Ramneek Kalra",
-      role: "Chair, IEEE YP Delhi Section\nIEEE Impact Creator",
+      name: "Ramneek Kalra",
+      role: "Sr. Consultant, Improving Inc.\nChair, IEEE YP Delhi Section",
       img: "/speakers/Ramneek Kalra Sir.png",
       objectPosition: "top",
     },
@@ -56,13 +56,13 @@ export default function GuestsSection() {
       img: "/speakers/Abdul Q. Ansari.png",
     },
     {
-      name: "Mr. H.L. Bajaj",
+      name: "Dr. H.L. Bajaj",
       role: "Chair, IEEE LMAG Delhi Section\nEx Chairman, CEA",
       img: "/speakers/H L Bajaj.png",
       objectFit: "contain",
     },
     {
-      name: "Mr. Rajendra K. Asthana",
+      name: "Dr. Rajendra K. Asthana",
       role: "Advisor, IEEE India Council\nEx-Director, SDS Softpro (P) Ltd.",
       img: "/speakers/Mr. Rajendra K. Asthana.png",
       objectPosition: "center 20%",

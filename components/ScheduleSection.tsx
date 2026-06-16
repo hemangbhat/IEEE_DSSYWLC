@@ -23,9 +23,15 @@ export default function ScheduleSection() {
       highlight: false,
     },
     {
-      time: "10:00 – 11:30 AM",
+      time: "10:00 – 11:00 AM",
       title: "Inauguration Ceremony",
       description: "Formal welcome & inaugural addresses",
+      highlight: true,
+    },
+    {
+      time: "11:00 – 11:30 AM",
+      title: "Breaking the Ice",
+      description: "",
       highlight: true,
     },
     {
@@ -36,9 +42,10 @@ export default function ScheduleSection() {
     },
     {
       time: "12:00 – 12:30 PM",
-      title: "Breaking the Ice",
+      title: "Keynote Speaker Session",
       description: "",
       highlight: true,
+      tag: "Dr. Ashwini Aggarwal",
     },
     {
       time: "12:30 – 01:00 PM",
@@ -59,6 +66,7 @@ export default function ScheduleSection() {
       title: "Keynote Speaker Session",
       description: "",
       highlight: true,
+      tag: "Mr. Ayush Maiti",
     },
     {
       time: "02:00 – 03:00 PM",
@@ -88,12 +96,6 @@ export default function ScheduleSection() {
         "Trifecta is a three-round team event that combines music, communication, and puzzle-solving in a fun and engaging format.",
       highlight: false,
     },
-    {
-      time: "07:00 – 08:30 PM",
-      title: "Dinner",
-      description: "",
-      highlight: false,
-    },
   ];
 
   const day2: ScheduleItem[] = [
@@ -117,19 +119,20 @@ export default function ScheduleSection() {
       highlight: false,
     },
     {
-      time: "12:30 – 02:00 PM",
+      time: "12:30 – 01:30 PM",
       title: "Keynote Speaker Session",
       description: "",
       highlight: true,
+      tag: "Mr. Raghav Garg",
     },
     {
-      time: "02:00 – 03:00 PM",
+      time: "01:30 – 02:30 PM",
       title: "Lunch (Networking - 5)",
       description: "",
       highlight: false,
     },
     {
-      time: "03:00 – 04:30 PM",
+      time: "02:30 – 03:30 PM",
       title: "Competitions",
       description: "",
       highlight: true,
@@ -145,17 +148,15 @@ export default function ScheduleSection() {
       ],
     },
     {
-      time: "04:30 – 05:00 PM",
-      title: "Tea Session (Networking - 6)",
-      description:
-        "A light and refreshing break to recharge and unwind amidst the day's activities. Enjoy a selection of snacks while connecting and relaxing with fellow participants.",
-      highlight: false,
+      time: "03:30 – 05:30 PM",
+      title: "IEEE Cricket League",
+      description: "IEEE SB mixed team match",
+      highlight: true,
     },
     {
-      time: "05:00 – 06:00 PM",
-      title: "Jamming / Cultural Night",
-      description:
-        "An electrifying evening filled with music, dance, and vibrant performances celebrating diverse talents and cultures. Experience unforgettable moments as the stage comes alive with energy, creativity, and pure entertainment.",
+      time: "05:30 – 06:30 PM",
+      title: "Crescendo Eve",
+      description: "Jamming",
       highlight: true,
     },
   ];

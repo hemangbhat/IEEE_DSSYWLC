@@ -27,8 +27,8 @@ export default function GuestsSection() {
       img: "/speakers/Raghav Garg.png",
     },
     {
-      name: "Ayush Maiti",
-      role: "Consultant, Bain & Company\nAlumnus, IIM Lucknow",
+      name: "Mr. Ayush Maiti",
+      role: "Bain & Company, ex- EY\nMBA, IIM Lucknow\nex-IEEE NSUT Vice-Chair, ex-Delhi Section SSN",
       img: "/speakers/Ayush Maiti.png",
     },
     {

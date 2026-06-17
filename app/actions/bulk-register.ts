@@ -307,10 +307,12 @@ export async function submitBulkRegistration(
       ...memberRecords.map((r) => ({ values: r.values, token: r.token })),
     ];
 
-    // Push all rows to Google Sheets concurrently.
-    const sheetResults = await Promise.allSettled(
-      allRows.map((row) =>
-        pushRegistrationToSheet({
+    // Push rows to Google Sheets sequentially with a small delay to avoid
+    // rate-limit errors (rapid concurrent writes to the same sheet cause 429s).
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+    for (const row of allRows) {
+      try {
+        await pushRegistrationToSheet({
           profileToken: row.token,
           fullName: row.values.fullName,
           email: row.values.email,
@@ -324,14 +326,12 @@ export async function submitBulkRegistration(
           ieeeCardS3Key: row.values.ieeeCardS3Key,
           paymentScreenshotS3Key: row.values.paymentScreenshotS3Key,
           registrationStatus: row.values.registrationStatus,
-        }),
-      ),
-    );
-    sheetResults.forEach((result, i) => {
-      if (result.status === "rejected") {
-        console.error(`Sheet sync failed for ${allRows[i]!.values.email}:`, result.reason);
+        });
+      } catch (err) {
+        console.error(`Sheet sync failed for ${row.values.email}:`, err);
       }
-    });
+      await delay(300); // 300ms gap between writes to avoid Sheets API rate limits
+    }
 
     const totalTeamSize = 1 + memberRecords.length;
 

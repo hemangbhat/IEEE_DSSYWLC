@@ -23,7 +23,7 @@ import {
 
 // Bulk submits are heavier than single ones (up to 26 rows + emails + Sheets
 // calls), so the throttle is tighter.
-const BULK_RATE_LIMIT_MAX = 3;
+const BULK_RATE_LIMIT_MAX = 5;
 const BULK_RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
 export type BulkRegisterState = {

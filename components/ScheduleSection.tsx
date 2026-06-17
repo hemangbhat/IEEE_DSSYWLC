@@ -66,7 +66,7 @@ export default function ScheduleSection() {
       title: "Keynote Speaker Session",
       description: "",
       highlight: true,
-      tag: "Mr. Ayush Maiti",
+      tag: "Dr. Ashwini Aggarwal",
     },
     {
       time: "02:00 – 03:00 PM",

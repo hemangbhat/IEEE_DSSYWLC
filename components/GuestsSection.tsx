@@ -168,7 +168,7 @@ export default function GuestsSection() {
           </h2>
           <div className="w-16 h-0.5 bg-[#7B1F34] mx-auto"></div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto mb-20 animate-on-scroll items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-5xl mx-auto mb-20 animate-on-scroll items-stretch">
           {chiefGuests.map((guest, i) => (
             <div key={i} className="flex w-full">
               {renderCard(guest, "2x")}

@@ -9,14 +9,19 @@ export default function GuestsSection() {
 
   const chiefGuests: Guest[] = [
     {
+      name: "Prof. M.N. Hoda",
+      role: "Chair, IEEE Delhi Section\nDirector, BVICAM",
+      img: "https://res.cloudinary.com/dlia5xgwx/image/upload/v1770186780/mnhoda_thmusc.jpg",
+    },
+    {
       name: "Prof. Prerna Gaur",
       role: "Chair, IEEE India Council\nDirector, NSUT West Campus\nDirector, NSUT IIF",
       img: "https://res.cloudinary.com/dlia5xgwx/image/upload/v1770186781/drprernagaur_lp5okn.jpg",
     },
     {
-      name: "Prof. M.N. Hoda",
-      role: "Chair, IEEE Delhi Section\nDirector, BVICAM",
-      img: "https://res.cloudinary.com/dlia5xgwx/image/upload/v1770186780/mnhoda_thmusc.jpg",
+      name: "Dr. Preeti Bajaj",
+      role: "Chair-Elect, IEEE India Council\nVice Chancellor, G.H. Raisoni University",
+      img: "/speakers/preeti-bajaj.png",
     },
   ];
 
@@ -27,14 +32,14 @@ export default function GuestsSection() {
       img: "/speakers/Raghav Garg.png",
     },
     {
-      name: "Mr. Ayush Maiti",
-      role: "Bain & Company, ex- EY\nMBA, IIM Lucknow\nex-IEEE NSUT Vice-Chair, ex-Delhi Section SSN",
-      img: "/speakers/Ayush Maiti.png",
-    },
-    {
       name: "Dr. Ashwini Aggarwal",
       role: "Chair, IEEE EPS Delhi Section\nProfessor of Practice, MRIIRS",
       img: "/speakers/Dr. Ashwini-K Aggarwal.png",
+    },
+    {
+      name: "Mr. Ayush Maiti",
+      role: "Bain & Company, ex- EY\nMBA, IIM Lucknow\nex-IEEE NSUT Vice-Chair, ex-Delhi Section SSN",
+      img: "/speakers/Ayush Maiti.png",
     },
     {
       name: "Ramneek Kalra",

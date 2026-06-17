@@ -20,7 +20,7 @@ export default function GuestsSection() {
     },
     {
       name: "Dr. Preeti Bajaj",
-      role: "Chair-Elect, IEEE India Council\nVice Chancellor, G.H. Raisoni University",
+      role: "Chair-Elect, IEEE India Council",
       img: "/speakers/preeti-bajaj.png",
     },
   ];

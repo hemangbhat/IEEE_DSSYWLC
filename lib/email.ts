@@ -174,7 +174,7 @@ const STATUS_LABELS: Record<string, { label: string; badge: string; color: strin
     badge: "REGISTRATION APPROVED",
     color: "#16a34a",
     bg: "#f0fdf4",
-    description: "Great news! Your registration has been approved. We're super excited to see you at the congress!",
+    description: "Your spot is confirmed and everything's set on our end. All that's left is for you to show up ready to make the most of it. We can't wait to welcome you in person at the congress.",
   },
   rejected: {
     label: "Declined",
@@ -198,6 +198,9 @@ const STATUS_LABELS: Record<string, { label: string; badge: string; color: strin
     description: "Just a quick update: your registration is currently being reviewed by our organizing team. We'll send you another email as soon as it's verified!",
   },
 };
+
+const WHATSAPP_GROUP_URL =
+  "https://chat.whatsapp.com/LSzp4eld5Mo9nX44FgFujB?s=cl&p=i&ilr=0&amv=2";
 
 export async function sendStatusUpdateEmail(
   to: string,
@@ -224,15 +227,42 @@ export async function sendStatusUpdateEmail(
     `
     : "";
 
+  // Approved registrants get a warm welcome intro; others get a neutral one.
+  const introHtml =
+    newStatus === "verified"
+      ? "Welcome aboard! We're thrilled to have you with us. Your registration for <strong>DSSYWLC '25</strong> has been reviewed and officially approved. You're now part of a community of young changemakers coming together to learn, connect, and lead."
+      : "Just a quick update about your registration for <strong>DSSYWLC '25</strong>.";
+
+  // Only approved/verified registrants get the WhatsApp group invite.
+  const whatsappBlock =
+    newStatus === "verified"
+      ? `
+      <!-- WhatsApp Group Box -->
+      <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; padding: 20px; margin: 24px 0; border-radius: 6px; text-align: center;">
+        <p style="font-size: 14px; font-weight: bold; color: #166534; margin: 0 0 6px 0;">Join the Official Participants Group</p>
+        <p style="font-size: 13px; color: #334155; line-height: 1.5; margin: 0 0 16px 0;">
+          This is your go-to space for live updates, schedule changes, key announcements, and an early chance to connect with fellow participants before the congress begins. Join now so you stay in the loop.
+        </p>
+        <a href="${WHATSAPP_GROUP_URL}" style="display: inline-block; background-color: #25D366; color: #ffffff; text-decoration: none; padding: 12px 32px; font-size: 13px; font-weight: bold; letter-spacing: 0.5px; border-radius: 4px;">Join WhatsApp Group &rarr;</a>
+      </div>
+    `
+      : "";
+
   return sendEmail({
     to,
     subject: `Registration Status Update: ${statusInfo.label} — DSSYWLC '25`,
     textContent: [
       `Hi ${name},`,
       "",
-      `Just a quick update about your registration for DSSYWLC '25. Your status has been updated to: ${statusInfo.label}.`,
+      newStatus === "verified"
+        ? "Welcome aboard! We're thrilled to have you with us. Your registration for DSSYWLC '25 has been reviewed and officially approved. You're now part of a community of young changemakers coming together to learn, connect, and lead."
+        : `Just a quick update about your registration for DSSYWLC '25. Your status has been updated to: ${statusInfo.label}.`,
       "",
       remarks ? `Reviewer Remarks:\n${remarks}` : "",
+      "",
+      newStatus === "verified"
+        ? `Please join our official WhatsApp group for important updates and announcements: ${WHATSAPP_GROUP_URL}`
+        : "",
       "",
       `You can view your complete registration details and track updates here: ${profileUrl}`,
       "",
@@ -261,7 +291,7 @@ export async function sendStatusUpdateEmail(
                 <td style="padding: 32px 24px;">
                   <p style="font-size: 15px; font-weight: bold; color: #7B1F34; margin-top: 0; margin-bottom: 16px;">Hi ${safeName},</p>
                   <p style="font-size: 14px; color: #334155; line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
-                    Just a quick update about your registration for <strong>DSSYWLC '25</strong>.
+                    ${introHtml}
                   </p>
                   
                   <!-- Status Box -->
@@ -273,6 +303,8 @@ export async function sendStatusUpdateEmail(
                   </div>
                   
                   ${remarksBlock}
+                  
+                  ${whatsappBlock}
                   
                   <!-- Action Button -->
                   <div style="text-align: center; margin: 32px 0 16px 0;">

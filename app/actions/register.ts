@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { registrations } from "@/lib/db/schema";
 import { sendConfirmationEmail } from "@/lib/email";
 import { step1Schema, step2Schema, step3Schema } from "@/lib/validations";
+import { REGISTRATIONS_CLOSED } from "@/lib/registration-status";
 import { pushRegistrationToSheet } from "@/lib/google-sheets";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 import { isRateLimited } from "@/lib/rate-limit";
@@ -95,6 +96,13 @@ export async function submitRegistration(
   _prevState: RegisterState,
   formData: FormData,
 ): Promise<RegisterState> {
+  if (REGISTRATIONS_CLOSED) {
+    return {
+      success: false,
+      message: "Registrations are now closed.",
+    };
+  }
+
   const clientIp = await getClientIp();
 
   // Throttle by IP (defence-in-depth; primary protection is the CAPTCHA below).

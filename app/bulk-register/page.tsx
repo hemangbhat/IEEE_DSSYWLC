@@ -9,6 +9,8 @@ import {
   type BulkRegisterState,
 } from "@/app/actions/bulk-register";
 import { registrationCategories } from "@/lib/validations";
+import { REGISTRATIONS_CLOSED } from "@/lib/registration-status";
+import RegistrationsClosed from "@/components/RegistrationsClosed";
 
 const initialSubmitState: BulkRegisterState = { success: false };
 
@@ -176,6 +178,13 @@ function StepIndicator({ currentStep }: { currentStep: 1 | 2 | 3 | 4 }) {
 }
 
 export default function BulkRegisterPage() {
+  if (REGISTRATIONS_CLOSED) {
+    return <RegistrationsClosed />;
+  }
+  return <BulkRegisterForm />;
+}
+
+function BulkRegisterForm() {
   const [submitState, submitAction, isSubmitting] = useActionState(
     submitBulkRegistration,
     initialSubmitState,

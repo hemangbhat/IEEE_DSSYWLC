@@ -17,6 +17,8 @@ import {
   step1Schema,
   step2Schema,
 } from "@/lib/validations";
+import { REGISTRATIONS_CLOSED } from "@/lib/registration-status";
+import RegistrationsClosed from "@/components/RegistrationsClosed";
 
 const initialSubmitState: RegisterState = { success: false };
 
@@ -163,6 +165,13 @@ function StepIndicator({ currentStep }: { currentStep: 1 | 2 | 3 }) {
 }
 
 export default function RegisterPage() {
+  if (REGISTRATIONS_CLOSED) {
+    return <RegistrationsClosed />;
+  }
+  return <RegisterForm />;
+}
+
+function RegisterForm() {
   const [submitState, submitAction, isSubmitting] = useActionState(
     submitRegistration,
     initialSubmitState,

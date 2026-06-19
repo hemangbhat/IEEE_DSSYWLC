@@ -10,6 +10,7 @@ import {
   sendBulkMemberConfirmationEmail,
 } from "@/lib/email";
 import { bulkRegistrationSchema } from "@/lib/validations";
+import { REGISTRATIONS_CLOSED } from "@/lib/registration-status";
 import { pushRegistrationToSheet } from "@/lib/google-sheets";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 import { isRateLimited } from "@/lib/rate-limit";
@@ -76,6 +77,13 @@ export async function submitBulkRegistration(
   _prevState: BulkRegisterState,
   formData: FormData,
 ): Promise<BulkRegisterState> {
+  if (REGISTRATIONS_CLOSED) {
+    return {
+      success: false,
+      message: "Registrations are now closed.",
+    };
+  }
+
   const clientIp = await getClientIp();
 
   // Throttle by IP (defence-in-depth; primary protection is the CAPTCHA below).

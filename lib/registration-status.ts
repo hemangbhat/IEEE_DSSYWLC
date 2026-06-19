@@ -7,4 +7,4 @@
  *
  * This single flag controls BOTH /register and /bulk-register.
  */
-export const REGISTRATIONS_CLOSED = false;
+export const REGISTRATIONS_CLOSED = true;
